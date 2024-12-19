@@ -13,12 +13,12 @@ public class HomePageTest extends BaseClass {
 	
 	@Test
 	public void logoTest() {
-		homePage.logoValidation();
+		homePage.homePageLogoValidation();
 	}
 	
 	@Test
 	public void titleTest() {
-		homePage.titleValidation();
+		homePage.homeTitleValidation();
 	}
 	
 	@Test
@@ -30,13 +30,19 @@ public class HomePageTest extends BaseClass {
 	public void allTheFooterMenuTest() {
 		homePage.validationForAllFooterMenu();
 	}
-//	@Test
-//	public void loginStepsTest() {
-//		login.loginSteps();
-//	}
+
 	@Test
-	public void homePageValidationTest() {
-		homePage.homePageValidations();
+	public void homePageMiddleValidationTest() {
+		homePage.homePageMiddleValidations();
+	}
+	@Test
+	public void homePageNumberAndEmilValidationTest() {
+		homePage.homePagePhoneNumberandEmailValidation();
+	}
+	@Test
+	public void HomePageAllTest() {
+		homePage.homePageAll();
+		
 	}
 
 }

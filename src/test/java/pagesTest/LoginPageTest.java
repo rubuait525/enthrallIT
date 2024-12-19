@@ -10,7 +10,13 @@ public class LoginPageTest extends BaseClass {
 	 Test the methods from home page
 	 */
 	@Test
+	public void loginTest() {
+		
+		login.clickLogin();
+	}
+	@Test
 	public void loginStepsTest() {
 		login.loginSteps();
 	}
+	
 }

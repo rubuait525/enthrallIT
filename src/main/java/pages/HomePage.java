@@ -95,14 +95,23 @@ public class HomePage {
 	WebElement sendNow_do_you_have_any_question;
 	@FindBy(xpath = "//button[@data-dismiss='alert']")
 	WebElement something_went_wrong;
-	public void logoValidation() {
+	@FindBy(xpath = "//p[@class='phone-number']")
+	WebElement homePagePhoneNumber;
+	@FindBy(xpath = "//p[@class='email-name']" )
+	WebElement homePageEmail;
+	
+	
+	
+	
+	
+	public void homePageLogoValidation() {
 		pause(3000);
 		elementDisplayed(logo);
 		clickElement(logo);
 		pause(3000);
 	}
 	
-	public void titleValidation() {
+	public void homeTitleValidation() {
 		pause(3000);
 		verifyTitle(driver, "Enthrall IT");
 		pause(3000);
@@ -147,7 +156,15 @@ public class HomePage {
 		
 				
 	}
-	public void homePageValidations() {
+	public void homePagePhoneNumberandEmailValidation() {
+		pause(2000);
+		verifyTextOfTheWebElement(homePagePhoneNumber, "+1 929-301-6028");
+		pause(1000);
+		verifyTextOfTheWebElement(homePageEmail,"info@enthrallit.com" );
+		
+	}
+	
+	public void homePageMiddleValidations() {
 		pause(4000);
 		clickElement(homeHeader);
 		pause(3000);
@@ -213,6 +230,20 @@ public class HomePage {
 		
 				
 				
+	}
+	public void homePageAll() {
+		homePageLogoValidation();
+		pause(2000);
+		homeTitleValidation();
+		pause(2000);
+		validationForAllHeaderMenu();
+		pause(2000);
+		homePagePhoneNumberandEmailValidation();
+		pause(2000);
+		homePageMiddleValidations();
+		pause(2000);
+		validationForAllFooterMenu();
+		
 	}
 	
 	

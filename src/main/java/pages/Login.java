@@ -18,8 +18,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import constants.Attribute;
 import static common.CommonActions.*;
 import static common.CommonWaits.*;
+//import static pages.Dashboard.*;
 //import static common.commonMethod.inputText;
 //import static common.commonMethod.pouse;
+
 
 import java.time.Duration;
 
@@ -37,11 +39,13 @@ public class Login {
 	 */
 	WebDriver driver;
 	WebDriverWait wait;
+	//Dashboard dashboard;
 
 	public Login(WebDriver driver) {
 
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+		//dashboard = new Dashboard(driver);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	}
 	@FindBy(xpath = "//a[@id='login-link']")
@@ -57,6 +61,7 @@ public class Login {
 	
 	
 	public void clickLogin() {
+		pause(2000);
 		clickElement(loginLink);
 	}
 	
@@ -76,9 +81,9 @@ public class Login {
 		
 	}
 	public void loginSteps() {
-		pause(1000);
-		clickLogin();
 		pause(3000);
+		clickLogin();
+		pause(2000);
 		loginPageTitleValidation();
 		pause(1000);
 		loginPageUrlValidation();
@@ -102,6 +107,33 @@ public class Login {
 		clickElement(finalLogin);
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		verifyCurrentUrl(driver,"https://enthrallit.com/dashboard/" );
+	}
+	public void loginForDashboardEasy() {
+		pause(2000);
+		loginPageTitleValidation();
+		//loginTextValidation();
+		//pause(1000);
+		//clickLogin();
+		inputText(useremail,"rubuait525@gmail.com" );
+		pause(1000);
+		inputText(userpassword,"Password$1" );
+		clickElement(finalLogin);
+		verifyTitle(driver, "Enthrall IT - Dashboard");
+		verifyCurrentUrl(driver,"https://enthrallit.com/dashboard/" );
+	
+
+
+		
+	}
+	public void loginWithClickLoginFromHomePage() {
+		pause(2000);
+		clickLogin();
+		loginPageTitleValidation();
+		inputText(useremail,"rubuait525@gmail.com" );
+		pause(1000);
+		inputText(userpassword,"Password$1" );
+		clickElement(finalLogin);
+		pause(2000);
 	}
 
 }
