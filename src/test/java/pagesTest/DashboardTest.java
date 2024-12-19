@@ -77,5 +77,12 @@ public class DashboardTest extends BaseClass {
 	public void  othersTest() {
 		dashboard.othersOnDashboard();
 	}
-
+	@Test
+	public void  automationTest() {
+		dashboard.automationOnDashboard();
+	}
+	@Test
+	public void  enrollNowAutomationTest() {
+		dashboard.enrollNowOnAutomation();
+	}
 }

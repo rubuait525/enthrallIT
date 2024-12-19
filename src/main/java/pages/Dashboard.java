@@ -1,5 +1,6 @@
 package pages;
 
+import java.security.PublicKey;
 import java.time.Duration;
 
 import javax.xml.xpath.XPath;
@@ -57,8 +58,7 @@ public class Dashboard {
 	WebElement logout;
 	@FindBy(xpath = "//h1[text()= 'Dashboard']")
 	WebElement headerDashboardElement;
-	@FindBy(css = "#HomeworkChart > div > canvas:nth-child(2)")
-	WebElement headTOtoeElement;
+
 	@FindBy(xpath = "//span[text()='Profile']")
 	WebElement profile;
 	@FindBy(xpath = "//a[@id='home-tab']")
@@ -105,6 +105,20 @@ public class Dashboard {
 	WebElement others;
 	@FindBy(xpath = "//h1[text()='Others']")
 	WebElement othersValidation;
+
+	@FindBy(xpath = "//span[text()='Automation']")
+	WebElement automation;
+	@FindBy(xpath = "//h3[text()='Automation']")
+	WebElement automationValidation;
+	@FindBy(xpath = "//h1[@class='sub-title']")
+	WebElement subTitleHeaderValidation;
+	@FindBy(xpath = "//button[text()='Enroll Now']")
+	WebElement enrollNow;
+	@FindBy(xpath = "//h3[text()='Select your course from the dropdown']")
+	WebElement headerOfEnrollNow;
+	@FindBy(xpath = "//h5[text()='Please enter your personal and contact information.']")
+	WebElement subHeaderOfEnrollNow;
+
 	public void dashboardLandingNecessary() {
 		pause(4000);
 		dashboardValidation();
@@ -260,6 +274,7 @@ public class Dashboard {
 		verifyTextOfTheWebElement(meetingListvalidation, "Meeting List");
 
 	}
+
 	public void classRecordingOnDashboard() {
 		login.loginWithClickLoginFromHomePage();
 		pause(1000);
@@ -269,6 +284,7 @@ public class Dashboard {
 		verifyTextOfTheWebElement(meetingList1validation, "Meeting List");
 
 	}
+
 	public void othersOnDashboard() {
 		login.loginWithClickLoginFromHomePage();
 		pause(1000);
@@ -277,5 +293,32 @@ public class Dashboard {
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		verifyTextOfTheWebElement(othersValidation, "Others");
 
+	}
+
+	public void automationOnDashboard() {
+		login.loginWithClickLoginFromHomePage();
+		pause(1000);
+		clickElement(automation);
+		verifyCurrentUrl(driver, "https://enthrallit.com/dashboard/dashboard/automation/");
+		verifyTitle(driver, "Enthrall IT - Dashboard");
+		verifyTextOfTheWebElement(automationValidation, "Automation");
+		validationOfSubHeader(subTitleHeaderValidation, "Please choose from below");
+//		pause(1000);
+//		clickElement(enrollNow);
+//		switchToChildWindow(driver, automation, enrollNow);
+//		verifyCurrentUrl(driver, "https://enthrallit.com/course/dashboard/enrolls/");
+
+
+	}
+
+	public void enrollNowOnAutomation() {
+	automationOnDashboard();
+	pause(1000);
+	clickElement(enrollNow);
+	switchToChildWindow(driver, automation, enrollNow);
+	verifyCurrentUrl(driver, "https://enthrallit.com/course/dashboard/enrolls/");
+	validationOfHeader(headerOfEnrollNow, "Select your course from the dropdown");
+	validationOfSubHeader(subHeaderOfEnrollNow,"Please enter your personal and contact information.");
+		
 	}
 }
