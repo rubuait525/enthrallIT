@@ -145,7 +145,7 @@ public class HomePage {
 		pause(2000);
 		elementEnabled(aboutUsHeader);
 		clickElement(aboutUsHeader);
-		verifyTitle(driver, "Enthrall IT");
+		verifyTitle(driver, "About us");
 		verifyCurrentUrl(driver, "https://enthrallit.com/about/");
 		
 		pause(2000);
@@ -219,7 +219,7 @@ public class HomePage {
 		pause(2000);
 		elementEnabled(aboutUsFooter);
 		clickElement(aboutUsFooter);
-		verifyTitle(driver, "Enthrall IT");
+		verifyTitle(driver, "About us");
 		verifyCurrentUrl(driver, "https://enthrallit.com/about/");
 		
 		pause(2000);

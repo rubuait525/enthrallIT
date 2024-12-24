@@ -85,4 +85,79 @@ public class DashboardTest extends BaseClass {
 	public void  enrollNowAutomationTest() {
 		dashboard.enrollNowOnAutomation();
 	}
+	@Test
+	public void  firstNameEnrollTest() {
+		dashboard.firstNameOfEnroll();
+	}
+	@Test
+	public void  middleNameEnrollTest() {
+		dashboard.middleNameOnEnrollNow();
+	}
+	@Test
+	public void  lastNameEnrollTest() {
+		dashboard.LastNameOnEnrollNow();
+	}
+	@Test
+	public void  selectProfessionDropdownTest() {
+		dashboard.selectProfessionDropdown();
+	}
+	@Test
+	public void  selectCourseDropdownTest() {
+		dashboard.selectCourseDropdown();
+	}
+	@Test
+	public void  selectphonenumberTest() {
+		dashboard.phoneNumInEnrollNowPage();
+	}
+	@Test
+	public void emailAddressEnrollNowTest() {
+		dashboard.emailAddressEnrollNow();
+	}
+	@Test
+	public void passwordInEnrollNowTest() {
+		dashboard.passwordInEnrollNow();
+	}
+	@Test
+	public void genderInEnrollNowTest() {
+		dashboard.chooseGenderInEnrollNow();
+	}
+	@Test
+	public void  chooseimageFileTest() {
+		dashboard.chooseImageFile();
+	}
+	@Test
+	public void  choosePhotoIDFileTest() {
+		dashboard.choosePhotoID();
+	}
+	@Test
+	public void  birthYearDropdownEnrollnowTest() {
+		dashboard.birthYearDropDownInEnrollnow();
+		
+	}
+	@Test
+	public void  birthMonthDropdownEnrollnowTest() {
+		dashboard.birthMonthDropdown();
+		
+	}
+	@Test
+	public void  birthDateDropdownEnrollnowTest() {
+		dashboard.birthDateDropdown();
+		
+	}
+	@Test
+	public void  addressInEnrollnowTest() {
+		dashboard.addressEnroll();
+		
+	}
+	@Test
+	public void  cityEnrollnowTest() {
+		dashboard.cityInEnroll();
+		
+	}
+	@Test
+	public void  stateDropdownTest() {
+		dashboard.stateDropdownInEnroll();
+		
+	}
+	
 }
