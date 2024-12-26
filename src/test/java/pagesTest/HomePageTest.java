@@ -6,26 +6,26 @@ import baseUtil.BaseClass;
 import pages.Login.*;
 
 public class HomePageTest extends BaseClass {
-	
+
 	/*
-	 Test the methods from home page
+	 * Test the methods from home page
 	 */
-	
+
 	@Test
 	public void logoTest() {
 		homePage.homePageLogoValidation();
 	}
-	
+
 	@Test
 	public void titleTest() {
 		homePage.homeTitleValidation();
 	}
-	
+
 	@Test
 	public void allTheHeaderMenuTest() {
 		homePage.validationForAllHeaderMenu();
 	}
-	
+
 	@Test
 	public void allTheFooterMenuTest() {
 		homePage.validationForAllFooterMenu();
@@ -35,14 +35,16 @@ public class HomePageTest extends BaseClass {
 	public void homePageMiddleValidationTest() {
 		homePage.homePageMiddleValidations();
 	}
+
 	@Test
 	public void homePageNumberAndEmilValidationTest() {
 		homePage.homePagePhoneNumberandEmailValidation();
 	}
+
 	@Test
-	public void HomePageAllTest() {
+	public void homePageAllTest() {
 		homePage.homePageAll();
-		
+
 	}
 
 }

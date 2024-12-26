@@ -10,19 +10,23 @@ public class DashboardTest extends BaseClass {
 	/*
 	 Test the methods from home page
 	 */
-	@Test
-	public void returnSiteTest() {
-		dashboard.returnSiteClick();
-	}
-	@Test
-	public void dashboardValidation() {
-		dashboard.homePageValidation();
-		
-	}
-	@Test
-	public void clickOnImageTest() {
-		clickOnImageTest();
-	}
+//	@Test
+//	public void returnSiteTest() {
+//		dashboard.returnSiteClick();
+//	}
+//	@Test
+//	public void dashboardValidation() {
+//		dashboard.homePageValidation();
+//		
+//	}
+//	@Test
+//	public void clickOnImageTest() {
+//		clickOnImageTest();
+//	}
+	
+	
+	////////////////Test////////////
+	
 	@Test
 	public void allAboutDashboardTest() {
 		dashboard.allAboutDashboard();
@@ -129,19 +133,19 @@ public class DashboardTest extends BaseClass {
 	public void  choosePhotoIDFileTest() {
 		dashboard.choosePhotoID();
 	}
+//	@Test
+//	public void  birthYearDropdownEnrollnowTest() {
+//		dashboard.birthYearDropDownInEnrollnow();
+//		
+//	}
+//	@Test
+//	public void  birthMonthDropdownEnrollnowTest() {
+//		dashboard.birthMonthDropdown();
+//		
+//	}
 	@Test
-	public void  birthYearDropdownEnrollnowTest() {
-		dashboard.birthYearDropDownInEnrollnow();
-		
-	}
-	@Test
-	public void  birthMonthDropdownEnrollnowTest() {
-		dashboard.birthMonthDropdown();
-		
-	}
-	@Test
-	public void  birthDateDropdownEnrollnowTest() {
-		dashboard.birthDateDropdown();
+	public void  birthYearBirthMonthBirthDateDropdownTest() {
+		dashboard.birthYearBirthMonthBirthDateDropdown();
 		
 	}
 	@Test
@@ -158,6 +162,58 @@ public class DashboardTest extends BaseClass {
 	public void  stateDropdownTest() {
 		dashboard.stateDropdownInEnroll();
 		
+	}
+	@Test
+	public void  zipCodeTest() {
+		dashboard.zipCodeInEnroll();
+		
+	}
+	@Test
+	public void  immigrationStatusTest() {
+		dashboard.immigrationStatusInenroll();
+		
+	}
+	@Test
+	public void  arrivalDateTest() {
+		dashboard.arrivalDateInEnrollNow();
+		
+	}
+	@Test
+	public void  emergencyContactTest() {
+		dashboard.ememergenceyContact();
+		
+	}
+	@Test
+	public void  howDidYouKnowUsTest() {
+		dashboard.howDidYouKnow();
+		
+	}
+	@Test
+	public void  highestEduTest() {
+		dashboard.highestEduinenroll();
+		
+	}
+	@Test
+	public void  originCountryTest() {
+		dashboard.originCountry();
+		
+	}
+	@Test
+	public void  primaryLanguageTest() {
+		dashboard.languageMousehover();
+		
+	}
+	@Test
+	public void  signatureTest() {
+		dashboard.signatureInEnrollNow();
+	}
+	@Test
+	public void  doubleClickInEnrollTest() {
+		dashboard.doubleClick();
+	}
+	@Test
+	public void  submitButtonInEnrollTest() {
+		dashboard.submitButton();
 	}
 	
 }

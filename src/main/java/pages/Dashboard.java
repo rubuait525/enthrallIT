@@ -177,7 +177,7 @@ public class Dashboard {
 	@FindBy(xpath = "//select[@id='id_gender']")
 	WebElement chooseGender;
 	@FindBy(xpath = "//select[@id='id_gender']/option")
-	List<WebElement>chooseSexElements;
+	List<WebElement> chooseSexElements;
 	@FindBy(xpath = "//option[text()='Female']")
 	WebElement femaleInGender;
 	@FindBy(xpath = "//select[@name='birth_year']")
@@ -189,13 +189,13 @@ public class Dashboard {
 	@FindBy(xpath = "//select[@id='id_birth_month']")
 	WebElement birthMonthInEnrollNow;
 	@FindBy(xpath = "//select[@id='id_birth_month']/option")
-	List<WebElement>birthMonthDropList;
+	List<WebElement> birthMonthDropList;
 	@FindBy(xpath = "//span[text()='Birth Month is a required field.']")
 	WebElement birthMonthRequiredFieldElement;
 	@FindBy(xpath = "//select[@id='id_birth_date']")
 	WebElement birthDateInEnrollNow;
 	@FindBy(xpath = "//select[@id='id_birth_date']/option")
-	List<WebElement>birthDateList;
+	List<WebElement> birthDateList;
 	@FindBy(xpath = "//span[text()='Birth Date is a required field.']")
 	WebElement birthDateRequired;
 	@FindBy(xpath = "//input[@name='home_address_line_1']")
@@ -213,10 +213,44 @@ public class Dashboard {
 	@FindBy(xpath = "//select[@name='state']")
 	WebElement stateInEnrollNow;
 	@FindBy(xpath = "//select[@name='state']/option")
-	List<WebElement>stateDropdownList;
+	List<WebElement> stateDropdownList;
 	@FindBy(xpath = "//span[text()='State is a required field.']")
 	WebElement stateRequiredField;
-	
+	@FindBy(xpath = "//input[@name='zip_code']")
+	WebElement zipCodeInEnrollNow;
+	@FindBy(xpath = "//select[@name='immigration_status']")
+	WebElement immigrationStatus;
+	@FindBy(xpath = "//select[@name='immigration_status']/option")
+	List<WebElement> immigrationStatusList;
+	@FindBy(xpath = "//input[@name='arrival_date']")
+	WebElement arrivalDate;
+	@FindBy(xpath = "//input[@id='id_emergency_contact']")
+	WebElement emergencyContact;
+	@FindBy(xpath = "//span[@id='emergency_contact_error']")
+	WebElement emergencyContactError;
+	@FindBy(xpath = "//input[@name='know_us']")
+	WebElement howDidYouKnowUs;
+	@FindBy(xpath = "//select[@id='id_highest_education']")
+	WebElement highestEdu;
+	@FindBy(xpath = "//select[@id='id_highest_education']/option")
+	List<WebElement> highestEduList;
+	@FindBy(xpath = "//select[@id='id_country_of_origin']")
+	WebElement originCountry;
+	@FindBy(xpath = "//input[@id='selected_language']")
+	WebElement selectLanguage;
+	@FindBy(xpath = "//div[text()='Bengali']")
+	WebElement languageBangali;
+	@FindBy(xpath = "//input[@name='sign_by_name']")
+	WebElement signatureInEnroll;
+	@FindBy(xpath = "//span[text()='Signature is a required field.']")
+	WebElement signatureRequired;
+	@FindBy(xpath = "//span[text()='Please provide your full name as above']")
+	WebElement fullNameError;
+	@FindBy(xpath = "//input[@id='is_agree']")
+	WebElement doubleClickInEnroll;
+	@FindBy(xpath = "//button[@id='submit_button']")
+	WebElement submitButton;
+
 /////////////////////------methods--------/////////////////////////////
 	public void dashboardLandingNecessary() {
 		pause(4000);
@@ -421,7 +455,7 @@ public class Dashboard {
 	}
 
 	public void firstNameOfEnroll() {
-		pause(1000);
+
 		enrollNowOnAutomation();
 		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
 		pause(2000);
@@ -511,8 +545,9 @@ public class Dashboard {
 		inputTextThenClickTab(phoneNumInEnrollNow, "0125467");
 		pause(2000);
 	}
+
 	public void emailAddressEnrollNow() {
-		//driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
 		enrollNowOnAutomation();
 		clickElementThenTab(emailInEnrollNow);
 		verifyErrorMessageUnderTheField(emailRequiredField, Attribute.INNER_HTML, "Email Address is a required field.");
@@ -525,19 +560,22 @@ public class Dashboard {
 		inputTextThenClickTab(emailInEnrollNow, "ruby345@gmail.com");
 		pause(3000);
 	}
+
 	public void passwordInEnrollNow() {
-		//driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
 		enrollNowOnAutomation();
 		clickElementThenTab(passwordEnrollNow);
 		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML, "Password is a required field.");
 		inputTextThenClickTab(passwordEnrollNow, "@$%^1234dhhdjdj");
-		verifyErrorMessageUnderTheField(passwordReferRequirements, Attribute.INNER_HTML, "Please refer to Password requirements.");
+		verifyErrorMessageUnderTheField(passwordReferRequirements, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
 		clearTextFromTheField(passwordEnrollNow);
 		inputTextThenClickTab(passwordEnrollNow, "Password$1234");
 		pause(3000);
 	}
+
 	public void chooseGenderInEnrollNow() {
-		//driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
 		enrollNowOnAutomation();
 		pause(1000);
 		selectElelementFromDropdownOnebyOne(chooseGender, chooseSexElements);
@@ -547,82 +585,220 @@ public class Dashboard {
 	}
 
 	public void chooseImageFile() {
-		//driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
 		enrollNowOnAutomation();
 		uploadPhotoImage(chooseImageInEnrollNow, "./image/personalImage.jpg");
 
 	}
+
 	public void choosePhotoID() {
-		//driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
 		enrollNowOnAutomation();
 		uploadPhotoImage(choosePhotoID, "./image/photoid.png");
-		
+
 	}
+
 	public void birthYearDropDownInEnrollnow() {
-		//driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
 		enrollNowOnAutomation();
 		clickElementThenTab(birthYearDropDown);
-		verifyErrorMessageUnderTheField(birthYearRequiredFieldElement,Attribute.INNER_HTML , "Birth Year is a required field.");
+		verifyErrorMessageUnderTheField(birthYearRequiredFieldElement, Attribute.INNER_HTML,
+				"Birth Year is a required field.");
 		clickElement(birthYearDropDown);
 		pause(2000);
 		selectDropdown(birthYearDropDown, "1966");
 		pause(3000);
-		
+
 	}
+
 	public void birthMonthDropdown() {
-		//driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
 		enrollNowOnAutomation();
 		clickElementThenTab(birthMonthInEnrollNow);
-		verifyErrorMessageUnderTheField(birthMonthRequiredFieldElement, Attribute.INNER_HTML, "Birth Month is a required field.");
+		verifyErrorMessageUnderTheField(birthMonthRequiredFieldElement, Attribute.INNER_HTML,
+				"Birth Month is a required field.");
 		selectElelementFromDropdownOnebyOne(birthMonthInEnrollNow, birthMonthDropList);
 		pause(3000);
 		selectDropdown(birthMonthInEnrollNow, "April");
 		pause(2000);
 	}
-	public void birthDateDropdown() {
-		//driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+
+	public void birthYearBirthMonthBirthDateDropdown() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
 		enrollNowOnAutomation();
+		clickElementThenTab(birthYearDropDown);
+		verifyErrorMessageUnderTheField(birthYearRequiredFieldElement, Attribute.INNER_HTML,
+				"Birth Year is a required field.");
+		clickElement(birthYearDropDown);
+		pause(2000);
+		selectDropdown(birthYearDropDown, "1966");
+		pause(1000);
+
+		clickElementThenTab(birthMonthInEnrollNow);
+		verifyErrorMessageUnderTheField(birthMonthRequiredFieldElement, Attribute.INNER_HTML,
+				"Birth Month is a required field.");
+		selectElelementFromDropdownOnebyOne(birthMonthInEnrollNow, birthMonthDropList);
+		pause(3000);
+		selectDropdown(birthMonthInEnrollNow, "April");
+		pause(1000);
+
 		clickElementThenTab(birthDateInEnrollNow);
-		verifyErrorMessageUnderTheField(birthMonthRequiredFieldElement, Attribute.INNER_HTML, "Birth Date is a required field.");
-		//selectElelementFromDropdownOnebyOne(birthDateInEnrollNow, birthDateList);
+		verifyErrorMessageUnderTheField(birthDateRequired, Attribute.INNER_HTML, "Birth Date is a required field.");
+		clickElement(birthDateInEnrollNow);
+		selectElelementFromDropdownOnebyOne(birthDateInEnrollNow, birthDateList);
+		pause(2000);
+		selectDropdown(birthDateInEnrollNow, "10");
+		pause(2000);
 	}
+
 	public void addressEnroll() {
-		//driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();	
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
 		clickElementThenTab(addressInEnrollNow);
-		verifyErrorMessageUnderTheField(addressRequiredField, Attribute.INNER_HTML, "Home Address Line 1 is a required field.");
+		verifyErrorMessageUnderTheField(addressRequiredField, Attribute.INNER_HTML,
+				"Home Address Line 1 is a required field.");
 		verifyErrorMessageUnderTheField(addressInEnrollNow, Attribute.MAX_LENGTH, "60");
 		pause(2000);
 		inputTextThenClickTab(addressInEnrollNow, "AbcdefghijKlanop");
 		pause(2000);
-		
+
 		clickElementThenTab(address2InEnrollNow);
-		//verifyErrorMessageUnderTheField(address2RequiredField, Attribute.INNER_HTML, "Home Address Line 2 is a required field.");
+		// verifyErrorMessageUnderTheField(address2RequiredField, Attribute.INNER_HTML,
+		// "Home Address Line 2 is a required field.");
 		verifyLengthOfTheFieldContent(address2InEnrollNow, Attribute.MAX_LENGTH, "65");
 		pause(1000);
 		clickElement(address2InEnrollNow);
 		pause(2000);
 		inputTextThenClickTab(address2InEnrollNow, "ABCDEFGHIJKLMNOP");
 	}
+
 	public void cityInEnroll() {
-		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		//enrollNowOnAutomation();
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
 		clickElementThenTab(cityInEnrollNow);
-		verifyErrorMessageUnderTheField(cityRequiredField,Attribute.INNER_HTML, "City is a required field.");
+		verifyErrorMessageUnderTheField(cityRequiredField, Attribute.INNER_HTML, "City is a required field.");
 		verifyLengthOfTheFieldContent(cityInEnrollNow, Attribute.MAX_LENGTH, "30");
 		pause(2000);
 		inputTextThenClickTab(cityInEnrollNow, "Hill");
-		
+
 	}
+
 	public void stateDropdownInEnroll() {
-		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		//enrollNowOnAutomation();
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
 		clickElementThenTab(stateInEnrollNow);
-		verifyErrorMessageUnderTheField(stateRequiredField,Attribute.INNER_HTML, "State is a required field.");
+		verifyErrorMessageUnderTheField(stateRequiredField, Attribute.INNER_HTML, "State is a required field.");
 		clickElement(stateInEnrollNow);
 		pause(2000);
-		selectDropdown(stateInEnrollNow,"Hawaii");
-		
+		selectDropdown(stateInEnrollNow, "Hawaii");
+
+	}
+
+	public void zipCodeInEnroll() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
+		clickElement(zipCodeInEnrollNow);
+		verifyLengthOfTheFieldContent(zipCodeInEnrollNow, Attribute.MAX_LENGTH, "5");
+		inputTextThenClickTab(zipCodeInEnrollNow, "65432");
+		pause(1000);
+
+	}
+
+	public void immigrationStatusInenroll() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
+		pause(1000);
+		selectElelementFromDropdownOnebyOne(immigrationStatus, immigrationStatusList);
+		pause(1000);
+		selectDropdown(immigrationStatus, "Citizen");
+
+	}
+
+	public void arrivalDateInEnrollNow() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
+		clickElement(arrivalDate);
+		verifyLengthOfTheFieldContent(arrivalDate, Attribute.MAX_LENGTH, "100");
+		inputTextThenClickTab(arrivalDate, "20thDecember2024");
+		pause(3000);
+
+	}
+
+	public void ememergenceyContact() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
+
+		clickElement(emergencyContact);
+		inputTextThenClickTab(emergencyContact, "2345677877");
+		pause(2000);
+
+	}
+
+	public void howDidYouKnow() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
+		pause(2000);
+		clickElement(howDidYouKnowUs);
+		verifyLengthOfTheFieldContent(howDidYouKnowUs, Attribute.MAX_LENGTH, "500");
+		inputTextThenClickTab(howDidYouKnowUs, "internet");
+
+	}
+
+	public void highestEduinenroll() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
+		selectElelementFromDropdownOnebyOne(highestEdu, highestEduList);
+		pause(2000);
+		selectDropdown(highestEdu, "Other");
+
+	}
+
+	public void originCountry() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
+		clickElement(originCountry);
+		selectDropdown(originCountry, "Bangladesh");
+		pause(2000);
+
+	}
+
+	public void languageMousehover() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
+		clickElement(selectLanguage);
+		pause(3000);
+		clickElement(languageBangali);
+		pause(3000);
+
+	}
+
+	public void signatureInEnrollNow() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
+		clickElementThenTab(signatureInEnroll);
+		verifyErrorMessageUnderTheField(signatureRequired, Attribute.INNER_HTML, "Signature is a required field.");
+		inputTextThenClickTab(signatureInEnroll, "ruby");
+		pause(2000);
+		verifyErrorMessageUnderTheField(fullNameError, Attribute.INNER_HTML, "Please provide your full name as above");
+		pause(1000);
+		inputTextThenClickTab(signatureInEnroll, "rubyrubyruby");
+		pause(2000);
+	}
+
+	public void doubleClick() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
+		pause(2000);
+		clickElement(doubleClickInEnroll);
+
+	}
+
+	public void submitButton() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		enrollNowOnAutomation();
+		pause(2000);
+		clickElement(submitButton);
+
 	}
 
 }
