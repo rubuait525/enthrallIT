@@ -65,6 +65,7 @@ public class Dashboard {
 	WebElement logoutOnDashboard;
 	@FindBy(xpath = "//h1[text()= 'Dashboard']")
 	WebElement headerDashboardElement;
+	
 	// Dashboard AsideBar
 	@FindBy(xpath = "//span[text()='Profile']")
 	WebElement profile;
@@ -125,7 +126,6 @@ public class Dashboard {
 	WebElement headerOfEnrollNow;
 	@FindBy(xpath = "//h5[text()='Please enter your personal and contact information.']")
 	WebElement subHeaderOfEnrollNow;
-	////////////////////////////////////////////////////////
 
 	@FindBy(xpath = "//input[@name='f_name']")
 	WebElement firstNameOfEnroll;
@@ -184,6 +184,9 @@ public class Dashboard {
 	WebElement choosePhotoID;
 	@FindBy(xpath = "//input[@name='email']")
 	WebElement emailInEnrollNow;
+	@FindBy(xpath = "//span[text()='Photo Id is a required field.']")
+	WebElement photoIdRequiredElement;
+	
 	@FindBy(xpath = "//span[text()='Email Address is a required field.']")
 	WebElement emailRequiredField;
 	@FindBy(xpath = "//span[text()='Must be a valid Email Address.']")
@@ -191,8 +194,7 @@ public class Dashboard {
 
 	@FindBy(xpath = "//input[@id='id_password']")
 	WebElement passwordEnrollNow;
-//	@FindBy(xpath = "//span[text()='Password is a required field.']")
-//	WebElement passwordRequired;
+
 	@FindBy(xpath = "//*[@id='password_error']")
 	WebElement passwordRequiredFeild;
 
@@ -543,10 +545,10 @@ public class Dashboard {
 				"Must be a valid Phone Number.");
 		inputTextThenClickTab(phoneNumInEnrollNow, "0000233095");
 		verifyErrorMessageUnderTheField(phoneNumMustNotStartWith0, Attribute.INNER_HTML,
-				"Must be a valid Phone Number.");
+				"Phone Number must not start with a 1 or 0.");
 		inputTextThenClickTab(phoneNumInEnrollNow, "1100233095");
 		verifyErrorMessageUnderTheField(phoneNumMustNotStartWith1, Attribute.INNER_HTML,
-				"Must be a valid Phone Number.");
+				"Phone Number must not start with a 1 or 0.");
 		inputTextThenClickTab(phoneNumInEnrollNow, "#%$%^$#@#$");
 		verifyErrorMessageUnderTheField(phoneNumMustBeValidNumber, Attribute.INNER_HTML,
 				"Must be a valid Phone Number.");
@@ -594,19 +596,22 @@ public class Dashboard {
 				"Please refer to Password requirements.");
 		clearTextFromTheField(passwordEnrollNow);
 		pause(1000);
-		inputTextThenClickTab(passwordEnrollNow, "Rubuait-Rahman");// must not have first name
+		inputText(firstNameOfEnroll, "Rubuait-Rahman");
+		inputText(lastNameOfEnrollNow, "Rahman");
+		inputText(emailInEnrollNow, "Rahman@gmail.com");
+		inputTextThenClickTab(passwordEnrollNow, "Rubuait#Rahman12");// must not have first name
 		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
-				"Please refer to Password requirements.");
+				"Password cannot contain First Name, Last Name, or email.");
 		clearTextFromTheField(passwordEnrollNow);
 		pause(1000);
-		inputTextThenClickTab(passwordEnrollNow, "Rahman-123");// must not have last name
+		inputTextThenClickTab(passwordEnrollNow, "Rahman$123");// must not have last name
 		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
-				"Please refer to Password requirements.");
+				"Password cannot contain First Name, Last Name, or email.");
 		clearTextFromTheField(passwordEnrollNow);
 		pause(1000);
 		inputTextThenClickTab(passwordEnrollNow, "Rahman@gmail.com");// must not have email parts
 		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
-				"Please refer to Password requirements.");
+				"Password cannot contain First Name, Last Name, or email.");
 		clearTextFromTheField(passwordEnrollNow);
 		pause(1000);
 		inputTextThenClickTab(passwordEnrollNow, "$%^^%@!##$$m");
@@ -636,12 +641,16 @@ public class Dashboard {
 	}
 
 	public void choose_ImageFile_validation_on_enroll_now() {
+		clickElementThenTab(chooseImageInEnrollNow);
+		verifyLengthOfTheFieldContent(imageRequiredFieldElement, Attribute.INNER_HTML, "Personal Image is a required field.");
 		pause(1000);
 		uploadPhotoImage(chooseImageInEnrollNow, "./image/personalImage.jpg");
 
 	}
 
 	public void choose_PhotoID_file_validation_on_enroll_now() {
+		clickElementThenTab(choosePhotoID);
+		verifyErrorMessageUnderTheField(alertCancelInTermsConditionElement, Attribute.INNER_HTML, "Photo Id is a required field.");
 		pause(1000);
 		uploadPhotoImage(choosePhotoID, "./image/photoid.png");
 
@@ -997,7 +1006,7 @@ public class Dashboard {
 	}
 
 	public void all_required_field_validation_and_error_From_enroll_now_page() {
-		//driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
 
 		// first name
 		verifyLengthOfTheFieldContent(firstNameOfEnroll, Attribute.MAX_LENGTH, "20");
@@ -1118,8 +1127,9 @@ public class Dashboard {
 				"Home Address Line 1 is a required field.");
 		verifyErrorMessageUnderTheField(addressInEnrollNow, Attribute.MAX_LENGTH, "60");
 		pause(2000);
-		//inputTextThenClickTab(addressInEnrollNow, "@#$%^^&&&*&");
-		//verifyErrorMessageUnderTheField(addressRequiredField, Attribute.INNER_HTML, "Must be alphanumeric characters.");
+		// inputTextThenClickTab(addressInEnrollNow, "@#$%^^&&&*&");
+		// verifyErrorMessageUnderTheField(addressRequiredField, Attribute.INNER_HTML,
+		// "Must be alphanumeric characters.");
 		inputTextThenClickTab(addressInEnrollNow, "AbcdefghijKlanop");
 		pause(2000);
 
@@ -1133,11 +1143,12 @@ public class Dashboard {
 		// city
 		clickElementThenTab(cityInEnrollNow);
 		pause(2000);
-		
+
 		verifyErrorMessageUnderTheField(cityRequiredField, Attribute.INNER_HTML, "City is a required field.");
 		verifyLengthOfTheFieldContent(cityInEnrollNow, Attribute.MAX_LENGTH, "30");
-		//verifyErrorMessageUnderTheField(cityMustBeAlphabeticElement, Attribute.INNER_HTML,
-				//"Must be alphabetic characters.");
+		// verifyErrorMessageUnderTheField(cityMustBeAlphabeticElement,
+		// Attribute.INNER_HTML,
+		// "Must be alphabetic characters.");
 		// state
 		clickElementThenTab(stateInEnrollNow);
 		verifyErrorMessageUnderTheField(stateRequiredField, Attribute.INNER_HTML, "State is a required field.");
@@ -1155,7 +1166,7 @@ public class Dashboard {
 		verifyErrorMessageUnderTheField(arrivalDateMustBeAlphanumaric, Attribute.INNER_HTML,
 				"Must be alphanumeric characters");
 		// emergenceyContact
-		
+
 		verifyLengthOfTheFieldContent(emergencyContactInEnroll, Attribute.MAX_LENGTH, "150");
 		inputTextThenClickTab(emergencyContactInEnroll, "@#$%^&*(*&");
 		verifyErrorMessageUnderTheField(emergenceyContactMustAlphanumeric, Attribute.INNER_HTML,
@@ -1180,7 +1191,7 @@ public class Dashboard {
 		inputTextThenClickTab(signatureInEnroll, "Rahman");
 		verifyErrorMessageUnderTheField(signatureFullNameError, Attribute.INNER_HTML,
 				"Please provide your full name as above");
-		
+
 	}
 
 }

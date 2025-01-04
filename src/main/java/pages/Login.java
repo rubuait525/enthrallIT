@@ -22,9 +22,7 @@ import static common.CommonWaits.*;
 //import static common.commonMethod.inputText;
 //import static common.commonMethod.pouse;
 
-
 import java.time.Duration;
-
 
 public class Login {
 	/*
@@ -39,15 +37,16 @@ public class Login {
 	 */
 	WebDriver driver;
 	WebDriverWait wait;
-	//Dashboard dashboard;
+	// Dashboard dashboard;
 
 	public Login(WebDriver driver) {
 
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-		//dashboard = new Dashboard(driver);
+		// dashboard = new Dashboard(driver);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	}
+
 	@FindBy(xpath = "//a[@id='login-link']")
 	WebElement loginLink;
 	@FindBy(xpath = "//div[@class='header-bottom']")
@@ -58,28 +57,30 @@ public class Login {
 	WebElement userpassword;
 	@FindBy(xpath = "//button[@id='login']")
 	WebElement finalLogin;
-	
-	
+
 	public void clickLogin() {
 		pause(2000);
 		clickElement(loginLink);
 	}
-	
+
 	public void loginPageTitleValidation() {
 		pause(2000);
 		verifyTitle(driver, "Enthrall IT");
 		pause(2000);
 	}
+
 	public void loginPageUrlValidation() {
 		pause(2000);
 		verifyCurrentUrl(driver, "https://enthrallit.com/accounts/login/");
-		
+
 	}
+
 	public void loginTextValidation() {
 		pause(2000);
 		verifyTextOfTheWebElement(loginLink, "Login into your account");
-		
+
 	}
+
 	public void loginSteps() {
 		pause(3000);
 		clickLogin();
@@ -88,50 +89,49 @@ public class Login {
 		pause(1000);
 		loginPageUrlValidation();
 		pause(1000);
-		//loginTextValidation();
+		// loginTextValidation();
 		elementEnabled(useremail);
 		clickElement(useremail);
-		//elementDisplayed(useremail);
+		// elementDisplayed(useremail);
 		pause(2000);
 		inputText(useremail, "rubuait234");
 		pause(2000);
 		clearTextFromTheField(useremail);
-		inputText(useremail,"rubuait525@gmail.com" );
+		inputText(useremail, "rubuait525@gmail.com");
 		pause(2000);
-		//clickElement(userpassword);
+		// clickElement(userpassword);
 		elementEnabled(userpassword);
 		clickElement(userpassword);
 		pause(2000);
-		inputText(userpassword,"Password$1" );
+		inputText(userpassword, "Password$1");
 		elementEnabled(finalLogin);
 		clickElement(finalLogin);
 		verifyTitle(driver, "Enthrall IT - Dashboard");
-		verifyCurrentUrl(driver,"https://enthrallit.com/dashboard/" );
+		verifyCurrentUrl(driver, "https://enthrallit.com/dashboard/");
 	}
+
 	public void loginForDashboardEasy() {
 		pause(2000);
 		loginPageTitleValidation();
-		//loginTextValidation();
-		//pause(1000);
-		//clickLogin();
-		inputText(useremail,"rubuait525@gmail.com" );
+		// loginTextValidation();
+		// pause(1000);
+		// clickLogin();
+		inputText(useremail, "rubuait525@gmail.com");
 		pause(1000);
-		inputText(userpassword,"Password$1" );
+		inputText(userpassword, "Password$1");
 		clickElement(finalLogin);
 		verifyTitle(driver, "Enthrall IT - Dashboard");
-		verifyCurrentUrl(driver,"https://enthrallit.com/dashboard/" );
-	
+		verifyCurrentUrl(driver, "https://enthrallit.com/dashboard/");
 
-
-		
 	}
+
 	public void loginWithClickLoginFromHomePage() {
 		pause(2000);
 		clickLogin();
 		loginPageTitleValidation();
-		inputText(useremail,"rubuait525@gmail.com" );
+		inputText(useremail, "rubuait525@gmail.com");
 		pause(1000);
-		inputText(userpassword,"Password$1" );
+		inputText(userpassword, "Password$1");
 		clickElement(finalLogin);
 		pause(2000);
 	}
