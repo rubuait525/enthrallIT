@@ -164,7 +164,7 @@ public class HomePage {
 		
 	}
 	
-	public void homePageMiddleValidations() {
+	public void homePageDoYouHaveAnyQuestionValidations() {
 		pause(4000);
 		clickElement(homeHeader);
 		pause(3000);
@@ -240,7 +240,7 @@ public class HomePage {
 		pause(2000);
 		homePagePhoneNumberandEmailValidation();
 		pause(2000);
-		homePageMiddleValidations();
+		homePageDoYouHaveAnyQuestionValidations();
 		pause(2000);
 		validationForAllFooterMenu();
 		

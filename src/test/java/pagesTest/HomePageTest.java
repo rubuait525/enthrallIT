@@ -33,7 +33,7 @@ public class HomePageTest extends BaseClass {
 
 	@Test
 	public void homePageMiddleValidationTest() {
-		homePage.homePageMiddleValidations();
+		homePage.homePageDoYouHaveAnyQuestionValidations();
 	}
 
 	@Test

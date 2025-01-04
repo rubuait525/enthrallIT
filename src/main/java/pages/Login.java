@@ -52,11 +52,11 @@ public class Login {
 	WebElement loginLink;
 	@FindBy(xpath = "//div[@class='header-bottom']")
 	WebElement loginpageHeader;
-	@FindBy(xpath = "//input[@id='emails']")
+	@FindBy(xpath = "//input[@name='username']")
 	WebElement useremail;
 	@FindBy(xpath = "//input[@name=\'password\']")
 	WebElement userpassword;
-	@FindBy(xpath = "//button[@id='logins']")
+	@FindBy(xpath = "//button[@id='login']")
 	WebElement finalLogin;
 	
 	

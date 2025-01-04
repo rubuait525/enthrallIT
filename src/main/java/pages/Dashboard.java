@@ -7,10 +7,16 @@ import java.util.List;
 
 import javax.xml.xpath.XPath;
 
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import constants.Attribute;
 import net.bytebuddy.asm.MemberSubstitution.FieldValue;
@@ -48,19 +54,18 @@ public class Dashboard {
 	}
 
 	@FindBy(xpath = "//a[text()='Return site']")
-	// "//a[contains(text(), 'Return site')]"
+
 	WebElement returnSite;
 	@FindBy(xpath = "//a[@id='dashboard-link']")
 	WebElement dashboard;
-	// @FindBy(xpath = "//*[@id=\"main\"]/div[1]/nav/ul[1]/li[2]/a/img")
 
 	@FindBy(xpath = "//img[@class='avatar-rounded']")
 	WebElement imageOnDashboard;
 	@FindBy(xpath = "//span[text()='Logout']")
-	WebElement logout;
+	WebElement logoutOnDashboard;
 	@FindBy(xpath = "//h1[text()= 'Dashboard']")
 	WebElement headerDashboardElement;
-
+	// Dashboard AsideBar
 	@FindBy(xpath = "//span[text()='Profile']")
 	WebElement profile;
 	@FindBy(xpath = "//a[@id='home-tab']")
@@ -120,6 +125,8 @@ public class Dashboard {
 	WebElement headerOfEnrollNow;
 	@FindBy(xpath = "//h5[text()='Please enter your personal and contact information.']")
 	WebElement subHeaderOfEnrollNow;
+	////////////////////////////////////////////////////////
+
 	@FindBy(xpath = "//input[@name='f_name']")
 	WebElement firstNameOfEnroll;
 	@FindBy(xpath = "//small[text()='Must be alphabetic characters.']")
@@ -127,7 +134,7 @@ public class Dashboard {
 	@FindBy(xpath = "//small[text()='First Name is a required field.']")
 	WebElement fNameRequiredError;
 	@FindBy(xpath = "//input[@name='m_name']")
-	WebElement mNameOfEnrollNoW;
+	WebElement middleNameOfEnrollNoW;
 	@FindBy(xpath = "//small[text()='Must be alphabetic characters.']")
 	WebElement mNameRequiredError;
 	@FindBy(xpath = "//input[@name='l_name']")
@@ -156,6 +163,19 @@ public class Dashboard {
 	WebElement phoneNumRequriedfeild;
 	@FindBy(xpath = "//small[text()='Phone Number must be exactly 10 digits.']")
 	WebElement phoneNumberError;
+	@FindBy(xpath = "//small[text()='Must be a valid Phone Number.']")
+	WebElement mustBeAValidPhoneNumber;
+	@FindBy(xpath = "//small[@id='phone_error']")
+	WebElement phoneNumMustBeExactly10Digit;
+	@FindBy(xpath = "//small[@id='phone_error']")
+	WebElement phoneNumMustNotStartWith1;
+	@FindBy(xpath = "//small[@id='phone_error']")
+	WebElement phoneNumMustNotStartWith0;
+	@FindBy(xpath = "//small[@id='phone_error']")
+	WebElement phoneNumCanNotBeAlphabatic;
+	@FindBy(xpath = "//small[@id='phone_error']")
+	WebElement phoneNumMustBeValidNumber;
+
 	@FindBy(xpath = "//input[@name='image']")
 	WebElement chooseImageInEnrollNow;
 	@FindBy(xpath = "//span[text()='Personal Image is a required field.']")
@@ -168,12 +188,14 @@ public class Dashboard {
 	WebElement emailRequiredField;
 	@FindBy(xpath = "//span[text()='Must be a valid Email Address.']")
 	WebElement emailMustBeValid;
+
 	@FindBy(xpath = "//input[@id='id_password']")
 	WebElement passwordEnrollNow;
-	@FindBy(xpath = "//span[text()='Password is a required field.']")
+//	@FindBy(xpath = "//span[text()='Password is a required field.']")
+//	WebElement passwordRequired;
+	@FindBy(xpath = "//*[@id='password_error']")
 	WebElement passwordRequiredFeild;
-	@FindBy(xpath = "//span[text()='Please refer to Password requirements.']")
-	WebElement passwordReferRequirements;
+
 	@FindBy(xpath = "//select[@id='id_gender']")
 	WebElement chooseGender;
 	@FindBy(xpath = "//select[@id='id_gender']/option")
@@ -210,6 +232,8 @@ public class Dashboard {
 	WebElement cityInEnrollNow;
 	@FindBy(xpath = "//span[text()='City is a required field.']")
 	WebElement cityRequiredField;
+	@FindBy(xpath = "//span[text()='Must be alphabetic characters.']")
+	WebElement cityMustBeAlphabeticElement;
 	@FindBy(xpath = "//select[@name='state']")
 	WebElement stateInEnrollNow;
 	@FindBy(xpath = "//select[@name='state']/option")
@@ -218,18 +242,28 @@ public class Dashboard {
 	WebElement stateRequiredField;
 	@FindBy(xpath = "//input[@name='zip_code']")
 	WebElement zipCodeInEnrollNow;
+	@FindBy(xpath = "//span[text()='Must be a valid numeric ZIP Code.']")
+	WebElement zipCodeMustNumeric;
+	@FindBy(xpath = "//span[text()='ZIP Code is a required field.']")
+	WebElement zipCodeIsRequiredField;
 	@FindBy(xpath = "//select[@name='immigration_status']")
 	WebElement immigrationStatus;
 	@FindBy(xpath = "//select[@name='immigration_status']/option")
 	List<WebElement> immigrationStatusList;
 	@FindBy(xpath = "//input[@name='arrival_date']")
 	WebElement arrivalDate;
+	@FindBy(xpath = "//span[text()='Must be alphanumeric characters']")
+	WebElement arrivalDateMustBeAlphanumaric;
 	@FindBy(xpath = "//input[@id='id_emergency_contact']")
-	WebElement emergencyContact;
+	WebElement emergencyContactInEnroll;
 	@FindBy(xpath = "//span[@id='emergency_contact_error']")
 	WebElement emergencyContactError;
+	@FindBy(xpath = "//span[text()='Must be alphanumeric characters']")
+	WebElement emergenceyContactMustAlphanumeric;
 	@FindBy(xpath = "//input[@name='know_us']")
 	WebElement howDidYouKnowUs;
+	@FindBy(xpath = "//span[text()='Must be alphabetic characters.']")
+	WebElement howDidYouKnowMustAlphabetic;
 	@FindBy(xpath = "//select[@id='id_highest_education']")
 	WebElement highestEdu;
 	@FindBy(xpath = "//select[@id='id_highest_education']/option")
@@ -245,22 +279,70 @@ public class Dashboard {
 	@FindBy(xpath = "//span[text()='Signature is a required field.']")
 	WebElement signatureRequired;
 	@FindBy(xpath = "//span[text()='Please provide your full name as above']")
-	WebElement fullNameError;
-	@FindBy(xpath = "//input[@id='is_agree']")
-	WebElement doubleClickInEnroll;
+	WebElement signatureFullNameError;
+	@FindBy(xpath = "//a[text()='Terms and condition']")
+	WebElement termsConditionInEnrollNow;
+
+	@FindBy(xpath = "//div[@id='termsModalBody']")
+	WebElement termsConditionAlert;
+
+	@FindBy(xpath = "//button[@id='acceptButton']")
+	WebElement termsConditionAcceptButtonInEnrollNow;
+
+	@FindBy(xpath = "//button[text()='Close']")
+	WebElement alertCancelInTermsConditionElement;
+
 	@FindBy(xpath = "//button[@id='submit_button']")
-	WebElement submitButton;
+	WebElement submitButtonInEnroll;
+	@FindBy(xpath = "//small[text()='First Name is a required field.']")
+	WebElement submitButtonForFirstNameRequired;
+
+	@FindBy(xpath = "//small[text()='Last Name is a required field.']")
+	WebElement submitButtonLastNameRequired;
+	@FindBy(xpath = "//small[@id='i_am_error']") // fI'm is a required field.
+	WebElement submitButtonImIsRequiredFieldElement;
+	@FindBy(xpath = "//small[@id='course_wish_error']") // Course Wish to Enroll is a required field.
+	WebElement submitButtonCourseRequiredElement;
+	@FindBy(xpath = "//small[text()='Phone Number is a required field.']")
+	WebElement submitButtonPhoneRequiredElement;
+	@FindBy(xpath = "//span[text()='Email Address is a required field.']")
+	WebElement submitButtonEmailRequired;
+	@FindBy(xpath = "//span[text()='Password is a required field.']")
+	WebElement submitButtonPasswordReuiredElement;
+	@FindBy(xpath = "//span[text()='Personal Image is a required field.']")
+	WebElement submitButtonPersonalImageRequiredElement;
+	@FindBy(xpath = "//span[text()='Photo Id is a required field.']")
+	WebElement submitButtonPhotoIDRequiredElement;
+	@FindBy(xpath = "//span[text()='Birth Year is a required field.']")
+	WebElement submitButtonBirthYearRequiredElement;
+	@FindBy(xpath = "//span[text()='Birth Month is a required field.']")
+	WebElement submitButtonBirthMonthRequiredElement;
+	@FindBy(xpath = "//span[text()='Birth Date is a required field.']")
+	WebElement submitButtonBirthDateRequiredElement;
+	@FindBy(xpath = "//span[text()='Home Address Line 1 is a required field.']")
+	WebElement submitButtonHomeAddressRequiredElement;
+	@FindBy(xpath = "//span[text()='City is a required field.']")
+	WebElement submitButtonCityRequiredElement;
+	@FindBy(xpath = "//span[text()='State is a required field.']")
+	WebElement submitButtonStateRequiredElement;
+	@FindBy(xpath = "//span[text()='ZIP Code is a required field.']")
+	WebElement submitButtonZipCodeRequiredElement;
+	@FindBy(xpath = "//span[text()='Signature is a required field.']")
+	WebElement summitButtonSignatureRequiredElement;
+	@FindBy(xpath = "//p[contains(text(),'Thank you for registering')]")
+	WebElement thankYouForRegistation;
+	@FindBy(xpath = "//button[text()='Right Click Action']")
+	WebElement rightClickActionInEnrollNow;
+	@FindBy(xpath = "//li[text()='Back']")
+	WebElement backInRightClickElement;
+	@FindBy(xpath = "//li[text()='Cancel']")
+	WebElement cancelInRightClickElement;
 
 /////////////////////------methods--------/////////////////////////////
 	public void dashboardLandingNecessary() {
 		pause(4000);
 		dashboardValidation();
 		clickElementThenTab(dashboard);
-
-	}
-
-	public void returnSiteClick() {
-		clickElement(returnSite);
 
 	}
 
@@ -277,150 +359,80 @@ public class Dashboard {
 
 	}
 
-	public void ClickOnDashboard() {
-		clickElement(dashboard);
-
-	}
-
-	public void clickOnImage() {
-		clickElement(imageOnDashboard);
-
-	}
-
-	public void clickLogout() {
-		clickElement(logout);
-
-	}
-
-	public void allAboutDashboard() {
+	public void dashboard_page_validation() {
 		pause(2000);
-		login.loginSteps();
-		pause(2000);
-		returnSiteClick();
+		clickElement(returnSite);
 		pause(2000);
 		homePageValidation();
-		ClickOnDashboard();
+		clickElement(dashboard);
 		pause(1000);
-		clickOnImage();
+		clickElement(imageOnDashboard);
 		pause(2000);
-		clickLogout();
-		login.loginForDashboardEasy();
+		clickElement(logoutOnDashboard);
 
 	}
 
-	public void profileOnDashboard() {
-		// homePage.homePageLogoValidation();
-		login.loginWithClickLoginFromHomePage();
+	public void aside_elements_On_dashboard_validation() {
+
 		clickElement(profile);
 		verifyCurrentUrl(driver, "https://enthrallit.com/dashboard/profile/");
 		verifyTextOfTheWebElement(profile, "Profile");
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 
-	}
-
-	public void addCourseOnDashboard() {
-		login.loginWithClickLoginFromHomePage();
 		pause(2000);
 		clickElement(addCourse);
 		verifyCurrentUrl(driver, "https://enthrallit.com/dashboard/enroll/course/");
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		// validationOfHeader(addCourse, "Enroll Course");
-		verifyTextOfTheWebElement(addCourse, "Enroll Course");
-	}
+		verifyTextOfTheWebElement(addCourse, " Course");
 
-	public void quizListOnDashboard() {
-		login.loginWithClickLoginFromHomePage();
 		pause(1000);
 		clickElement(quizList);
 		verifyCurrentUrl(driver, "https://enthrallit.com/assessment/latest/qz/");
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		verifyTextOfTheWebElement(quizList, "Quiz List");
 
-	}
-
-	public void homeWorkOnDashboard() {
-		login.loginWithClickLoginFromHomePage();
 		pause(1000);
 		clickElement(homeWork);
 		verifyCurrentUrl(driver, "https://enthrallit.com/assessment/data/list/hw/");
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		verifyTextOfTheWebElement(homeWorkListValidation, "Homework List");
 
-	}
-
-	public void coddingChallengeOnDashboard() {
-		login.loginWithClickLoginFromHomePage();
 		pause(1000);
 		clickElement(coddinChallenge);
 		verifyCurrentUrl(driver, "https://enthrallit.com/assessment/latest/cc/");
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		verifyTextOfTheWebElement(coddingChallengeValidation, "Coding Challenge List");
 
-	}
-
-	public void examOnDashboard() {
-		login.loginWithClickLoginFromHomePage();
 		pause(1000);
 		clickElement(exam);
 		verifyCurrentUrl(driver, "https://enthrallit.com/assessment/latest/exam/");
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		verifyTextOfTheWebElement(examValidation, "Exam List");
 
-	}
-
-	public void bootCampOnDashboard() {
-		login.loginWithClickLoginFromHomePage();
-		pause(1000);
-		clickElement(bootCamp);
-		verifyCurrentUrl(driver, "https://enthrallit.com/assessment/data/list/bt/");
-		verifyTitle(driver, "Enthrall IT - Dashboard");
-		verifyTextOfTheWebElement(bootCampValidation, "Bootcamp List");
-
-	}
-
-	public void classNoteOnDashboard() {
-		login.loginWithClickLoginFromHomePage();
 		pause(1000);
 		clickElement(classNote);
 		verifyCurrentUrl(driver, "https://enthrallit.com/modules/class/note/list/#class_note");
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		verifyTextOfTheWebElement(classNoteListvalidation, "Class Note List");
 
-	}
-
-	public void classScheduleOnDashboard() {
-		login.loginWithClickLoginFromHomePage();
 		pause(1000);
 		clickElement(classSchedule);
 		verifyCurrentUrl(driver, "https://enthrallit.com/schedule/");
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		verifyTextOfTheWebElement(classCalendarvalidation, "Class Calendar");
 
-	}
-
-	public void joinTheClassOnDashboard() {
-		login.loginWithClickLoginFromHomePage();
 		pause(1000);
 		clickElement(joinTheClass);
 		verifyCurrentUrl(driver, "https://enthrallit.com/schedule/next-class/");
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		verifyTextOfTheWebElement(meetingListvalidation, "Meeting List");
 
-	}
-
-	public void classRecordingOnDashboard() {
-		login.loginWithClickLoginFromHomePage();
-		pause(1000);
 		clickElement(classRecording);
 		verifyCurrentUrl(driver, "https://enthrallit.com/schedule/recording/");
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		verifyTextOfTheWebElement(meetingList1validation, "Meeting List");
 
-	}
-
-	public void othersOnDashboard() {
-		login.loginWithClickLoginFromHomePage();
-		pause(1000);
 		clickElement(others);
 		verifyCurrentUrl(driver, "https://enthrallit.com/schedule/others/list/");
 		verifyTitle(driver, "Enthrall IT - Dashboard");
@@ -428,23 +440,13 @@ public class Dashboard {
 
 	}
 
-	public void automationOnDashboard() {
-		login.loginWithClickLoginFromHomePage();
-		pause(1000);
+	public void automation_validation_on_dashboard_page_with_enroll_now() {
 		clickElement(automation);
 		verifyCurrentUrl(driver, "https://enthrallit.com/dashboard/dashboard/automation/");
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		verifyTextOfTheWebElement(automationValidation, "Automation");
 		validationOfSubHeader(subTitleHeaderValidation, "Please choose from below");
-//		pause(1000);
-//		clickElement(enrollNow);
-//		switchToChildWindow(driver, automation, enrollNow);
-//		verifyCurrentUrl(driver, "https://enthrallit.com/course/dashboard/enrolls/");
 
-	}
-
-	public void enrollNowOnAutomation() {
-		automationOnDashboard();
 		pause(1000);
 		clickElement(enrollNow);
 		switchToChildWindow(driver, automation, enrollNow);
@@ -454,55 +456,53 @@ public class Dashboard {
 
 	}
 
-	public void firstNameOfEnroll() {
+	public void first_name_validation_on_enroll_now() {
 
-		enrollNowOnAutomation();
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
 		pause(2000);
 		clickElement(firstNameOfEnroll);
 		verifyLengthOfTheFieldContent(firstNameOfEnroll, Attribute.MAX_LENGTH, "20");
 		pause(1000);
-		inputTextThenClickTab(firstNameOfEnroll, "12345");
+		inputTextThenClickTab(firstNameOfEnroll, "123452340998222");
 		verifyErrorMessageUnderTheField(fNameAlphabeticError, Attribute.INNER_HTML, "Must be alphabetic characters.");
-		inputTextThenClickTab(firstNameOfEnroll, "#%^&()@#");
+		inputTextThenClickTab(firstNameOfEnroll, "#%^&()@#'%$##_(&%@");
 		verifyErrorMessageUnderTheField(fNameAlphabeticError, Attribute.INNER_HTML, "Must be alphabetic characters.");
 		clearTextFromTheField(firstNameOfEnroll);
 		verifyErrorMessageUnderTheField(fNameRequiredError, Attribute.INNER_HTML, "First Name is a required field.");
-		inputTextThenClickTab(firstNameOfEnroll, "venu-'Gopal Ayyar");
+		inputTextThenClickTab(firstNameOfEnroll, "Rubuait-Rahman");
 		pause(2000);
 
 	}
 
-	public void middleNameOnEnrollNow() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
-		clickElement(mNameOfEnrollNoW);
-		verifyErrorMessageUnderTheField(mNameOfEnrollNoW, Attribute.MAX_LENGTH, "20");
-		inputTextThenClickTab(mNameOfEnrollNoW, "1234");
+	public void middle_name_validation_on_enroll_now_page() {
+
+		clickElement(middleNameOfEnrollNoW);
+		verifyErrorMessageUnderTheField(middleNameOfEnrollNoW, Attribute.MAX_LENGTH, "20");
+		inputTextThenClickTab(middleNameOfEnrollNoW, "1234");
 		verifyErrorMessageUnderTheField(mNameRequiredError, Attribute.INNER_HTML, "Must be alphabetic characters.");
-		clearTextFromTheField(mNameOfEnrollNoW);
+		clearTextFromTheField(middleNameOfEnrollNoW);
 		pause(1000);
-		inputTextThenClickTab(mNameOfEnrollNoW, "hello");
+		inputTextThenClickTab(middleNameOfEnrollNoW, "hello");
 		pause(2000);
 	}
 
-	public void LastNameOnEnrollNow() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void last_name_validation_On_enrollNow() {
+
 		pause(2000);
 		clickElement(lastNameOfEnrollNow);
 		verifyErrorMessageUnderTheField(lastNameOfEnrollNow, Attribute.MAX_LENGTH, "25");
 		clickElementThenTab(lastNameOfEnrollNow);
 		verifyErrorMessageUnderTheField(lNameRequiredField, Attribute.INNER_HTML, "Last Name is a required field.");
-		inputTextThenClickTab(lastNameOfEnrollNow, "!@#$2344");
+		inputTextThenClickTab(lastNameOfEnrollNow, "!@#$%%$+()(&");
 		verifyErrorMessageUnderTheField(lNameAlphabaticError, Attribute.INNER_HTML, "Must be alphabetic characters.");
-		inputTextThenClickTab(lastNameOfEnrollNow, "Hi");
+		inputTextThenClickTab(lastNameOfEnrollNow, "123356777");
+		verifyErrorMessageUnderTheField(lNameAlphabaticError, Attribute.INNER_HTML, "Must be alphabetic characters.");
+
+		inputTextThenClickTab(lastNameOfEnrollNow, "Rahman");
 		pause(2000);
 	}
 
-	public void selectProfessionDropdown() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void select_profession_dropdown_validation_on_enroll_now() {
+
 		clickElementThenTab(selectProfession);
 		verifyErrorMessageUnderTheField(selectProfessionRequiredError, Attribute.INNER_HTML,
 				"I'm is a required field.");
@@ -513,10 +513,8 @@ public class Dashboard {
 
 	}
 
-	public void selectCourseDropdown() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
-		// clickElement(selectCourse);
+	public void select_course_dropdown_validation_on_enroll_now() {
+
 		pause(2000);
 		clickElementThenTab(selectCourse);
 		verifyErrorMessageUnderTheField(selectCourseRequiredError, Attribute.INNER_HTML,
@@ -530,77 +528,127 @@ public class Dashboard {
 
 	}
 
-	public void phoneNumInEnrollNowPage() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void phone_number_validation_on_enroll_now() {
+
 		clickElementThenTab(phoneNumInEnrollNow);
 		verifyErrorMessageUnderTheField(phoneNumRequriedfeild, Attribute.INNER_HTML,
 				"Phone Number is a required field.");
-		clickElement(phoneNumInEnrollNow);
-		inputTextThenClickTab(phoneNumInEnrollNow, "abhshsj");
+		verifyErrorMessageUnderTheField(phoneNumInEnrollNow, Attribute.MAX_LENGTH, "10");
+
+		inputTextThenClickTab(phoneNumInEnrollNow, "5467");
 		verifyErrorMessageUnderTheField(phoneNumberError, Attribute.INNER_HTML,
 				"Phone Number must be exactly 10 digits.");
+		inputTextThenClickTab(phoneNumInEnrollNow, "abggyhjjjjhsgsgs");
+		verifyErrorMessageUnderTheField(phoneNumCanNotBeAlphabatic, Attribute.INNER_HTML,
+				"Must be a valid Phone Number.");
+		inputTextThenClickTab(phoneNumInEnrollNow, "0000233095");
+		verifyErrorMessageUnderTheField(phoneNumMustNotStartWith0, Attribute.INNER_HTML,
+				"Must be a valid Phone Number.");
+		inputTextThenClickTab(phoneNumInEnrollNow, "1100233095");
+		verifyErrorMessageUnderTheField(phoneNumMustNotStartWith1, Attribute.INNER_HTML,
+				"Must be a valid Phone Number.");
+		inputTextThenClickTab(phoneNumInEnrollNow, "#%$%^$#@#$");
+		verifyErrorMessageUnderTheField(phoneNumMustBeValidNumber, Attribute.INNER_HTML,
+				"Must be a valid Phone Number.");
+
 		clearTextFromTheField(phoneNumInEnrollNow);
 		pause(2000);
-		inputTextThenClickTab(phoneNumInEnrollNow, "0125467");
-		pause(2000);
+		inputTextThenClickTab(phoneNumInEnrollNow, "2345678902");
+
 	}
 
-	public void emailAddressEnrollNow() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void email_address_validation_on_enroll_now() {
+
 		clickElementThenTab(emailInEnrollNow);
 		verifyErrorMessageUnderTheField(emailRequiredField, Attribute.INNER_HTML, "Email Address is a required field.");
-		clickElement(emailInEnrollNow);
-		pause(2000);
+		verifyLengthOfTheFieldContent(emailInEnrollNow, Attribute.MAX_LENGTH, "74");
+
 		inputTextThenClickTab(emailInEnrollNow, "#$$%!123dfgghg");
 		verifyErrorMessageUnderTheField(emailMustBeValid, Attribute.INNER_HTML, "Must be a valid Email Address.");
-		pause(2000);
+
 		clearTextFromTheField(emailInEnrollNow);
 		inputTextThenClickTab(emailInEnrollNow, "ruby345@gmail.com");
 		pause(3000);
 	}
 
-	public void passwordInEnrollNow() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void password_validation_on_enroll_now() {
+
 		clickElementThenTab(passwordEnrollNow);
 		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML, "Password is a required field.");
-		inputTextThenClickTab(passwordEnrollNow, "@$%^1234dhhdjdj");
-		verifyErrorMessageUnderTheField(passwordReferRequirements, Attribute.INNER_HTML,
+		verifyLengthOfTheFieldContent(passwordEnrollNow, Attribute.MAX_LENGTH, "74");
+		inputTextThenClickTab(passwordEnrollNow, "a123");// must be 8 characters
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Must contain a minimum of 8 characters.");
+		inputTextThenClickTab(passwordEnrollNow, "ruby*ruby");// must have 1 upper case
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
 				"Please refer to Password requirements.");
 		clearTextFromTheField(passwordEnrollNow);
-		inputTextThenClickTab(passwordEnrollNow, "Password$1234");
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "RUBY*RUBY");// must have 1 lower case
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "RUBYruby");// must have 1 special character
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "Rubuait-Rahman");// must not have first name
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "Rahman-123");// must not have last name
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "Rahman@gmail.com");// must not have email parts
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "$%^^%@!##$$m");
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "1234567910");
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+//		inputTextThenClickTab(passwordEnrollNow, "Password$1");//must not have common password
+//		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+//				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		inputTextThenClickTab(passwordEnrollNow, "Abcd@12$");
 		pause(3000);
 	}
 
-	public void chooseGenderInEnrollNow() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
-		pause(1000);
+	public void choose_gender_validation_in_enroll_now() {
+
 		selectElelementFromDropdownOnebyOne(chooseGender, chooseSexElements);
 		pause(2000);
 		selectDropdown(chooseGender, "Female");
 		pause(2000);
 	}
 
-	public void chooseImageFile() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void choose_ImageFile_validation_on_enroll_now() {
+		pause(1000);
 		uploadPhotoImage(chooseImageInEnrollNow, "./image/personalImage.jpg");
 
 	}
 
-	public void choosePhotoID() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void choose_PhotoID_file_validation_on_enroll_now() {
+		pause(1000);
 		uploadPhotoImage(choosePhotoID, "./image/photoid.png");
 
 	}
 
-	public void birthYearDropDownInEnrollnow() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void birth_year_dropdown_in_enroll_now() {
+
 		clickElementThenTab(birthYearDropDown);
 		verifyErrorMessageUnderTheField(birthYearRequiredFieldElement, Attribute.INNER_HTML,
 				"Birth Year is a required field.");
@@ -612,8 +660,7 @@ public class Dashboard {
 	}
 
 	public void birthMonthDropdown() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+
 		clickElementThenTab(birthMonthInEnrollNow);
 		verifyErrorMessageUnderTheField(birthMonthRequiredFieldElement, Attribute.INNER_HTML,
 				"Birth Month is a required field.");
@@ -623,9 +670,9 @@ public class Dashboard {
 		pause(2000);
 	}
 
-	public void birthYearBirthMonthBirthDateDropdown() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void birthYear_birthMonth_birthDate_dropdown_in_Enroll_now() {
+		// Here i put three methods together because without birthYear and BirthMonth,
+		// birthdate can not be selected from dropdown
 		clickElementThenTab(birthYearDropDown);
 		verifyErrorMessageUnderTheField(birthYearRequiredFieldElement, Attribute.INNER_HTML,
 				"Birth Year is a required field.");
@@ -651,14 +698,15 @@ public class Dashboard {
 		pause(2000);
 	}
 
-	public void addressEnroll() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void address_validation_on_enroll_now() {
+
 		clickElementThenTab(addressInEnrollNow);
 		verifyErrorMessageUnderTheField(addressRequiredField, Attribute.INNER_HTML,
 				"Home Address Line 1 is a required field.");
 		verifyErrorMessageUnderTheField(addressInEnrollNow, Attribute.MAX_LENGTH, "60");
 		pause(2000);
+		inputTextThenClickTab(addressInEnrollNow, "@#$%^^&&&*&");
+		verifyErrorMessageUnderTheField(addressRequiredField, Attribute.INNER_HTML, "Must be alphanumeric characters.");
 		inputTextThenClickTab(addressInEnrollNow, "AbcdefghijKlanop");
 		pause(2000);
 
@@ -672,20 +720,22 @@ public class Dashboard {
 		inputTextThenClickTab(address2InEnrollNow, "ABCDEFGHIJKLMNOP");
 	}
 
-	public void cityInEnroll() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void city_validation_in_enroll_now() {
+
 		clickElementThenTab(cityInEnrollNow);
 		verifyErrorMessageUnderTheField(cityRequiredField, Attribute.INNER_HTML, "City is a required field.");
 		verifyLengthOfTheFieldContent(cityInEnrollNow, Attribute.MAX_LENGTH, "30");
+		inputTextThenClickTab(cityInEnrollNow, "!@#$%%%");
+		pause(3000);
+		verifyErrorMessageUnderTheField(cityMustBeAlphabeticElement, Attribute.INNER_HTML,
+				"Must be alphabetic characters.");
 		pause(2000);
-		inputTextThenClickTab(cityInEnrollNow, "Hill");
+		inputTextThenClickTab(cityInEnrollNow, "leander");
 
 	}
 
-	public void stateDropdownInEnroll() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void state_dropdown_validation_in_enroll() {
+
 		clickElementThenTab(stateInEnrollNow);
 		verifyErrorMessageUnderTheField(stateRequiredField, Attribute.INNER_HTML, "State is a required field.");
 		clickElement(stateInEnrollNow);
@@ -694,19 +744,24 @@ public class Dashboard {
 
 	}
 
-	public void zipCodeInEnroll() {
+	public void zip_code_validation_in_Enroll_now() {
 		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
-		clickElement(zipCodeInEnrollNow);
+
+		clickElementThenTab(zipCodeInEnrollNow);
+		verifyErrorMessageUnderTheField(zipCodeIsRequiredField, Attribute.INNER_HTML, "ZIP Code is a required field.");
 		verifyLengthOfTheFieldContent(zipCodeInEnrollNow, Attribute.MAX_LENGTH, "5");
+
+		inputTextThenClickTab(zipCodeInEnrollNow, "123");
+		pause(2000);
+		verifyErrorMessageUnderTheField(zipCodeMustNumeric, Attribute.INNER_HTML, "Must be a valid numeric ZIP Code.");
+		clearTextFromTheField(zipCodeInEnrollNow);
 		inputTextThenClickTab(zipCodeInEnrollNow, "65432");
 		pause(1000);
 
 	}
 
-	public void immigrationStatusInenroll() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void immigration_status_validation_in_enroll() {
+
 		pause(1000);
 		selectElelementFromDropdownOnebyOne(immigrationStatus, immigrationStatusList);
 		pause(1000);
@@ -714,91 +769,418 @@ public class Dashboard {
 
 	}
 
-	public void arrivalDateInEnrollNow() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void arrival_date_validation_in_enroll_now() {
+
 		clickElement(arrivalDate);
 		verifyLengthOfTheFieldContent(arrivalDate, Attribute.MAX_LENGTH, "100");
+		inputTextThenClickTab(arrivalDate, "#$%^&*$%^");
+		verifyErrorMessageUnderTheField(arrivalDateMustBeAlphanumaric, Attribute.INNER_HTML,
+				"Must be alphanumeric characters");
+		clearTextFromTheField(arrivalDate);
 		inputTextThenClickTab(arrivalDate, "20thDecember2024");
 		pause(3000);
 
 	}
 
-	public void ememergenceyContact() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
-
-		clickElement(emergencyContact);
-		inputTextThenClickTab(emergencyContact, "2345677877");
-		pause(2000);
-
+	public void ememergencey_contact_validation_in_enroll_now() {
+		verifyLengthOfTheFieldContent(emergencyContactInEnroll, Attribute.MAX_LENGTH, "150");
+		inputTextThenClickTab(emergencyContactInEnroll, "@#$%^&*(*&");
+		verifyErrorMessageUnderTheField(emergenceyContactMustAlphanumeric, Attribute.INNER_HTML,
+				"Must be alphanumeric characters");
+		clearTextFromTheField(emergencyContactInEnroll);
+		inputTextThenClickTab(emergencyContactInEnroll, "4552234455");
+		pause(1000);
 	}
 
-	public void howDidYouKnow() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void how_did_you_know_validation_in_enroll_now() {
+
 		pause(2000);
 		clickElement(howDidYouKnowUs);
 		verifyLengthOfTheFieldContent(howDidYouKnowUs, Attribute.MAX_LENGTH, "500");
+		inputTextThenClickTab(howDidYouKnowUs, "!@#$%^&");
+		verifyErrorMessageUnderTheField(howDidYouKnowMustAlphabetic, Attribute.INNER_HTML,
+				"Must be alphabetic characters.");
+		pause(1000);
+		inputTextThenClickTab(howDidYouKnowUs, "12345566");
+		verifyErrorMessageUnderTheField(howDidYouKnowMustAlphabetic, Attribute.INNER_HTML,
+				"Must be alphabetic characters.");
+		clearTextFromTheField(howDidYouKnowUs);
 		inputTextThenClickTab(howDidYouKnowUs, "internet");
 
 	}
 
-	public void highestEduinenroll() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void highest_edu_validation_in_enroll_now() {
+
 		selectElelementFromDropdownOnebyOne(highestEdu, highestEduList);
 		pause(2000);
 		selectDropdown(highestEdu, "Other");
 
 	}
 
-	public void originCountry() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void origin_country_validation_in_enroll_now() {
+
 		clickElement(originCountry);
 		selectDropdown(originCountry, "Bangladesh");
 		pause(2000);
 
 	}
 
-	public void languageMousehover() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
-		clickElement(selectLanguage);
-		pause(3000);
-		clickElement(languageBangali);
-		pause(3000);
+	public void primary_language_mousehover_validation_in_enroll_now() {
+		pause(2000);
+		scrollIntoViewTheElementUsingJavascriptExecutor(driver, highestEdu);
+		pause(2000);
+		mouseHoverAction(driver, selectLanguage, languageBangali);
 
 	}
 
-	public void signatureInEnrollNow() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+	public void signature_validation_in_enroll_now() {
 		clickElementThenTab(signatureInEnroll);
 		verifyErrorMessageUnderTheField(signatureRequired, Attribute.INNER_HTML, "Signature is a required field.");
-		inputTextThenClickTab(signatureInEnroll, "ruby");
-		pause(2000);
-		verifyErrorMessageUnderTheField(fullNameError, Attribute.INNER_HTML, "Please provide your full name as above");
+		verifyLengthOfTheFieldContent(signatureInEnroll, Attribute.MAX_LENGTH, "150");
+		inputTextThenClickTab(signatureInEnroll, "Rubuait-Rahman");
+		verifyErrorMessageUnderTheField(signatureFullNameError, Attribute.INNER_HTML,
+				"Please provide your full name as above");
+		inputTextThenClickTab(signatureInEnroll, "Rahman");
+		verifyErrorMessageUnderTheField(signatureFullNameError, Attribute.INNER_HTML,
+				"Please provide your full name as above");
+		clearTextFromTheField(signatureInEnroll);
+
 		pause(1000);
-		inputTextThenClickTab(signatureInEnroll, "rubyrubyruby");
+
+		inputTextThenClickTab(signatureInEnroll, "Rubuait-Rahman Rahman");
 		pause(2000);
 	}
 
-	public void doubleClick() {
+	public void terms_and_condition_validation_enroll_now() {
 		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
-		pause(2000);
-		clickElement(doubleClickInEnroll);
+		scrollIntoViewTheElementUsingJavascriptExecutor(driver, cityInEnrollNow);
+		doubleClickActionAccept(driver, termsConditionInEnrollNow);
+
+		pause(1000);
+		System.out.println("trying to click accept btn");
+		driver.findElement(By.id("acceptButton")).click();
 
 	}
 
-	public void submitButton() {
+	public void submit_button_validation_in_enroll_now() {
 		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		enrollNowOnAutomation();
+		scrollIntoViewTheElementUsingJavascriptExecutor(driver, cityInEnrollNow);
+		clickElement(submitButtonInEnroll);
 		pause(2000);
-		clickElement(submitButton);
+		verifyErrorMessageUnderTheField(submitButtonForFirstNameRequired, Attribute.INNER_HTML,
+				"First Name is a required field.");
+		pause(2000);
+		verifyErrorMessageUnderTheField(submitButtonLastNameRequired, Attribute.INNER_HTML,
+				"Last Name is a required field.");
 
+		verifyErrorMessageUnderTheField(submitButtonImIsRequiredFieldElement, Attribute.INNER_HTML,
+				"I'm is a required field.");
+
+		verifyErrorMessageUnderTheField(submitButtonCourseRequiredElement, Attribute.INNER_HTML,
+				"Course Wish to Enroll is a required field. ");
+		verifyErrorMessageUnderTheField(submitButtonPhoneRequiredElement, Attribute.INNER_HTML,
+				"Phone Number is a required field.");
+		verifyErrorMessageUnderTheField(submitButtonEmailRequired, Attribute.INNER_HTML,
+				"Email Address is a required field.");
+		verifyErrorMessageUnderTheField(submitButtonPasswordReuiredElement, Attribute.INNER_HTML,
+				"Password is a required field.");
+		verifyErrorMessageUnderTheField(submitButtonPersonalImageRequiredElement, Attribute.INNER_HTML,
+				"Personal Image is a required field.");
+		verifyErrorMessageUnderTheField(submitButtonPhotoIDRequiredElement, Attribute.INNER_HTML,
+				"Photo Id is a required field.");
+		verifyErrorMessageUnderTheField(submitButtonBirthYearRequiredElement, Attribute.INNER_HTML,
+				"Birth Year is a required field.");
+		verifyErrorMessageUnderTheField(submitButtonBirthMonthRequiredElement, Attribute.INNER_HTML,
+				"Birth Month is a required field.");
+		verifyErrorMessageUnderTheField(submitButtonBirthDateRequiredElement, Attribute.INNER_HTML,
+				"Birth Date is a required field.");
+		verifyErrorMessageUnderTheField(submitButtonHomeAddressRequiredElement, Attribute.INNER_HTML,
+				"Home Address Line 1 is a required field.");
+		verifyErrorMessageUnderTheField(submitButtonCityRequiredElement, Attribute.INNER_HTML,
+				"City is a required field.");
+		verifyErrorMessageUnderTheField(submitButtonStateRequiredElement, Attribute.INNER_HTML,
+				"State is a required field.");
+		verifyErrorMessageUnderTheField(submitButtonZipCodeRequiredElement, Attribute.INNER_HTML,
+				"ZIP Code is a required field.");
+		verifyErrorMessageUnderTheField(summitButtonSignatureRequiredElement, Attribute.INNER_HTML,
+				"Signature is a required field.");
+
+	}
+
+	public void right_click_action_validation_enroll_now() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		scrollIntoViewTheElementUsingJavascriptExecutor(driver, cityInEnrollNow);
+
+//		clickElement(rightClickActionInEnrollNow);
+		rightClick(driver, rightClickActionInEnrollNow);
+//		pause(3000);
+		System.out.println("trying to click back:: this runs into exception ");
+		clickElement(backInRightClickElement);
+
+		System.out.println("trying to click dissmiss/cancel ");
+		driver.switchTo().alert().dismiss();
+
+	}
+
+	public void happy_path_enroll_now_dircet_to_registration_complete() {
+		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+
+		clickElement(firstNameOfEnroll);
+		inputTextThenClickTab(firstNameOfEnroll, "Rubuait-Rahman");
+		pause(1000);
+		clickElement(lastNameOfEnrollNow);
+		inputTextThenClickTab(lastNameOfEnrollNow, "Rahman");
+		pause(1000);
+		selectElelementFromDropdownOnebyOne(selectProfession, selectProfessionList);
+		selectDropdown(selectProfession, "a Student");
+		pause(1000);
+		selectElelementFromDropdownOnebyOne(selectCourse, selectCourseList);
+		clickElement(selectCourse);
+		clickElement(selectPython);
+		pause(1000);
+		inputTextThenClickTab(phoneNumInEnrollNow, "2345678902");
+		inputTextThenClickTab(emailInEnrollNow, "ruby345@gmail.com");
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "Abcd@12$");
+		pause(1000);
+		selectElelementFromDropdownOnebyOne(chooseGender, chooseSexElements);
+		pause(2000);
+		selectDropdown(chooseGender, "Female");
+		pause(2000);
+		uploadPhotoImage(chooseImageInEnrollNow, "./image/personalImage.jpg");
+		pause(1000);
+		uploadPhotoImage(choosePhotoID, "./image/photoid.png");
+		selectDropdown(birthYearDropDown, "1966");
+		pause(1000);
+		selectDropdown(birthMonthInEnrollNow, "April");
+		pause(1000);
+		selectDropdown(birthDateInEnrollNow, "10");
+		inputTextThenClickTab(addressInEnrollNow, "AbcdefghijKlanop");
+		pause(1000);
+		inputTextThenClickTab(address2InEnrollNow, "ABCDEFGHIJKLMNOP");
+		pause(1000);
+		inputTextThenClickTab(cityInEnrollNow, "leander");
+		pause(1000);
+		selectDropdown(stateInEnrollNow, "Hawaii");
+		pause(1000);
+		inputTextThenClickTab(zipCodeInEnrollNow, "65432");
+		pause(1000);
+		pause(1000);
+		selectDropdown(immigrationStatus, "Citizen");
+		pause(1000);
+		inputTextThenClickTab(arrivalDate, "20thDecember2024");
+		inputTextThenClickTab(emergencyContactInEnroll, "4552234455");
+		pause(1000);
+		inputTextThenClickTab(howDidYouKnowUs, "internet");
+		pause(1000);
+		selectDropdown(highestEdu, "Other");
+		selectDropdown(originCountry, "Bangladesh");
+		pause(1000);
+		// scrollIntoViewTheElementUsingJavascriptExecutor(driver, highestEdu);
+		pause(1000);
+		mouseHoverAction(driver, selectLanguage, languageBangali);
+		inputTextThenClickTab(signatureInEnroll, "Rubuait-Rahman Rahman");
+		// scrollIntoViewTheElementUsingJavascriptExecutor(driver, cityInEnrollNow);
+		doubleClickActionAccept(driver, termsConditionInEnrollNow);
+
+		pause(1000);
+		System.out.println("trying to click accept btn");
+		driver.findElement(By.id("acceptButton")).click();
+		clickElement(submitButtonInEnroll);
+		pause(1000);
+		rightClick(driver, rightClickActionInEnrollNow);
+		pause(3000);
+		System.out.println("trying to click back:: this runs into exception ");
+		clickElement(backInRightClickElement);
+		clickElement(thankYouForRegistation);
+
+	}
+
+	public void all_required_field_validation_and_error_From_enroll_now_page() {
+		//driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+
+		// first name
+		verifyLengthOfTheFieldContent(firstNameOfEnroll, Attribute.MAX_LENGTH, "20");
+		pause(1000);
+		inputTextThenClickTab(firstNameOfEnroll, "123452340998222");
+		verifyErrorMessageUnderTheField(fNameAlphabeticError, Attribute.INNER_HTML, "Must be alphabetic characters.");
+		inputTextThenClickTab(firstNameOfEnroll, "#%^&()@#'%$##_(&%@");
+		verifyErrorMessageUnderTheField(fNameAlphabeticError, Attribute.INNER_HTML, "Must be alphabetic characters.");
+		clearTextFromTheField(firstNameOfEnroll);
+		verifyErrorMessageUnderTheField(fNameRequiredError, Attribute.INNER_HTML, "First Name is a required field.");
+		// middle name
+		verifyErrorMessageUnderTheField(middleNameOfEnrollNoW, Attribute.MAX_LENGTH, "20");
+		inputTextThenClickTab(middleNameOfEnrollNoW, "1234");
+		verifyErrorMessageUnderTheField(mNameRequiredError, Attribute.INNER_HTML, "Must be alphabetic characters.");
+		clearTextFromTheField(middleNameOfEnrollNoW);
+		// last name
+		verifyErrorMessageUnderTheField(lastNameOfEnrollNow, Attribute.MAX_LENGTH, "25");
+		clickElementThenTab(lastNameOfEnrollNow);
+		verifyErrorMessageUnderTheField(lNameRequiredField, Attribute.INNER_HTML, "Last Name is a required field.");
+		inputTextThenClickTab(lastNameOfEnrollNow, "!@#$%%$+()(&");
+		verifyErrorMessageUnderTheField(lNameAlphabaticError, Attribute.INNER_HTML, "Must be alphabetic characters.");
+		inputTextThenClickTab(lastNameOfEnrollNow, "123356777");
+		verifyErrorMessageUnderTheField(lNameAlphabaticError, Attribute.INNER_HTML, "Must be alphabetic characters.");
+		// select profession
+		verifyErrorMessageUnderTheField(selectProfessionRequiredError, Attribute.INNER_HTML,
+				"I'm is a required field.");
+		// select course
+		clickElementThenTab(selectCourse);
+		verifyErrorMessageUnderTheField(selectCourseRequiredError, Attribute.INNER_HTML,
+				"Course Wish to Enroll is a required field. ");
+		// phone number
+		clickElementThenTab(phoneNumInEnrollNow);
+		verifyErrorMessageUnderTheField(phoneNumRequriedfeild, Attribute.INNER_HTML,
+				"Phone Number is a required field.");
+		verifyErrorMessageUnderTheField(phoneNumInEnrollNow, Attribute.MAX_LENGTH, "10");
+
+		inputTextThenClickTab(phoneNumInEnrollNow, "5467");
+		verifyErrorMessageUnderTheField(phoneNumberError, Attribute.INNER_HTML,
+				"Phone Number must be exactly 10 digits.");
+		inputTextThenClickTab(phoneNumInEnrollNow, "abggyhjjjjhsgsgs");
+		verifyErrorMessageUnderTheField(phoneNumCanNotBeAlphabatic, Attribute.INNER_HTML,
+				"Must be a valid Phone Number.");
+		inputTextThenClickTab(phoneNumInEnrollNow, "0000233095");
+		verifyErrorMessageUnderTheField(phoneNumMustNotStartWith0, Attribute.INNER_HTML,
+				"Must be a valid Phone Number.");
+		inputTextThenClickTab(phoneNumInEnrollNow, "1100233095");
+		verifyErrorMessageUnderTheField(phoneNumMustNotStartWith1, Attribute.INNER_HTML,
+				"Must be a valid Phone Number.");
+		inputTextThenClickTab(phoneNumInEnrollNow, "#%$%^$#@#$");
+		verifyErrorMessageUnderTheField(phoneNumMustBeValidNumber, Attribute.INNER_HTML,
+				"Must be a valid Phone Number.");
+		// email address
+		verifyErrorMessageUnderTheField(emailRequiredField, Attribute.INNER_HTML, "Email Address is a required field.");
+		verifyLengthOfTheFieldContent(emailInEnrollNow, Attribute.MAX_LENGTH, "74");
+
+		inputTextThenClickTab(emailInEnrollNow, "#$$%!123dfgghg");
+		verifyErrorMessageUnderTheField(emailMustBeValid, Attribute.INNER_HTML, "Must be a valid Email Address.");
+		// password
+		clickElementThenTab(passwordEnrollNow);
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML, "Password is a required field.");
+		verifyLengthOfTheFieldContent(passwordEnrollNow, Attribute.MAX_LENGTH, "74");
+		inputTextThenClickTab(passwordEnrollNow, "a123");// must be 8 characters
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Must contain a minimum of 8 characters.");
+		inputTextThenClickTab(passwordEnrollNow, "ruby*ruby");// must have 1 upper case
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "RUBY*RUBY");// must have 1 lower case
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "RUBYruby");// must have 1 special character
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "Rubuait-Rahman");// must not have first name
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "Rahman-123");// must not have last name
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "Rahman@gmail.com");// must not have email parts
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "$%^^%@!##$$m");
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(passwordEnrollNow);
+		pause(1000);
+		inputTextThenClickTab(passwordEnrollNow, "1234567910");
+		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		// birthyear
+		clickElementThenTab(birthYearDropDown);
+
+		verifyErrorMessageUnderTheField(birthYearRequiredFieldElement, Attribute.INNER_HTML,
+				"Birth Year is a required field.");
+		// birthMonth
+		clickElementThenTab(birthMonthInEnrollNow);
+		verifyErrorMessageUnderTheField(birthMonthRequiredFieldElement, Attribute.INNER_HTML,
+				"Birth Month is a required field.");
+		// birthDate
+		clickElementThenTab(birthDateInEnrollNow);
+		verifyErrorMessageUnderTheField(birthDateRequired, Attribute.INNER_HTML, "Birth Date is a required field.");
+		// home Address
+		clickElementThenTab(addressInEnrollNow);
+		verifyErrorMessageUnderTheField(addressRequiredField, Attribute.INNER_HTML,
+				"Home Address Line 1 is a required field.");
+		verifyErrorMessageUnderTheField(addressInEnrollNow, Attribute.MAX_LENGTH, "60");
+		pause(2000);
+		//inputTextThenClickTab(addressInEnrollNow, "@#$%^^&&&*&");
+		//verifyErrorMessageUnderTheField(addressRequiredField, Attribute.INNER_HTML, "Must be alphanumeric characters.");
+		inputTextThenClickTab(addressInEnrollNow, "AbcdefghijKlanop");
+		pause(2000);
+
+		clickElementThenTab(address2InEnrollNow);
+		// verifyErrorMessageUnderTheField(address2RequiredField, Attribute.INNER_HTML,
+		// "Home Address Line 2 is a required field.");
+		verifyLengthOfTheFieldContent(address2InEnrollNow, Attribute.MAX_LENGTH, "65");
+		pause(1000);
+		clickElement(address2InEnrollNow);
+		inputTextThenClickTab(address2InEnrollNow, "ABCDEFGHIJKLMNOP");
+		// city
+		clickElementThenTab(cityInEnrollNow);
+		pause(2000);
+		
+		verifyErrorMessageUnderTheField(cityRequiredField, Attribute.INNER_HTML, "City is a required field.");
+		verifyLengthOfTheFieldContent(cityInEnrollNow, Attribute.MAX_LENGTH, "30");
+		//verifyErrorMessageUnderTheField(cityMustBeAlphabeticElement, Attribute.INNER_HTML,
+				//"Must be alphabetic characters.");
+		// state
+		clickElementThenTab(stateInEnrollNow);
+		verifyErrorMessageUnderTheField(stateRequiredField, Attribute.INNER_HTML, "State is a required field.");
+		inputTextThenClickTab(stateInEnrollNow, "Taxas");
+		// zipcode
+		clickElementThenTab(zipCodeInEnrollNow);
+		verifyErrorMessageUnderTheField(zipCodeIsRequiredField, Attribute.INNER_HTML, "ZIP Code is a required field.");
+		verifyLengthOfTheFieldContent(zipCodeInEnrollNow, Attribute.MAX_LENGTH, "5");
+		inputTextThenClickTab(zipCodeInEnrollNow, "@#$%^&&&&&&&&&&&&&^");
+		verifyErrorMessageUnderTheField(zipCodeMustNumeric, Attribute.INNER_HTML, "Must be a valid numeric ZIP Code.");
+		// arrivalDate
+		clickElement(arrivalDate);
+		verifyLengthOfTheFieldContent(arrivalDate, Attribute.MAX_LENGTH, "100");
+		inputTextThenClickTab(arrivalDate, "#$%^&*$%^");
+		verifyErrorMessageUnderTheField(arrivalDateMustBeAlphanumaric, Attribute.INNER_HTML,
+				"Must be alphanumeric characters");
+		// emergenceyContact
+		
+		verifyLengthOfTheFieldContent(emergencyContactInEnroll, Attribute.MAX_LENGTH, "150");
+		inputTextThenClickTab(emergencyContactInEnroll, "@#$%^&*(*&");
+		verifyErrorMessageUnderTheField(emergenceyContactMustAlphanumeric, Attribute.INNER_HTML,
+				"Must be alphanumeric characters");
+		// how did you know us
+		clickElement(howDidYouKnowUs);
+		verifyLengthOfTheFieldContent(howDidYouKnowUs, Attribute.MAX_LENGTH, "500");
+		inputTextThenClickTab(howDidYouKnowUs, "!@#$%^&");
+		verifyErrorMessageUnderTheField(howDidYouKnowMustAlphabetic, Attribute.INNER_HTML,
+				"Must be alphabetic characters.");
+		pause(1000);
+		inputTextThenClickTab(howDidYouKnowUs, "12345566");
+		verifyErrorMessageUnderTheField(howDidYouKnowMustAlphabetic, Attribute.INNER_HTML,
+				"Must be alphabetic characters.");
+		// signature
+		clickElementThenTab(signatureInEnroll);
+		verifyErrorMessageUnderTheField(signatureRequired, Attribute.INNER_HTML, "Signature is a required field.");
+		verifyLengthOfTheFieldContent(signatureInEnroll, Attribute.MAX_LENGTH, "150");
+		inputTextThenClickTab(signatureInEnroll, "Rubuait-Rahman");
+		verifyErrorMessageUnderTheField(signatureFullNameError, Attribute.INNER_HTML,
+				"Please provide your full name as above");
+		inputTextThenClickTab(signatureInEnroll, "Rahman");
+		verifyErrorMessageUnderTheField(signatureFullNameError, Attribute.INNER_HTML,
+				"Please provide your full name as above");
+		
 	}
 
 }
