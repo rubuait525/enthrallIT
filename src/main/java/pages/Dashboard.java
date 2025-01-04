@@ -113,7 +113,7 @@ public class Dashboard {
 	WebElement others;
 	@FindBy(xpath = "//h1[text()='Others']")
 	WebElement othersValidation;
-
+	//automation and enrollNow
 	@FindBy(xpath = "//span[text()='Automation']")
 	WebElement automation;
 	@FindBy(xpath = "//h3[text()='Automation']")
@@ -126,29 +126,33 @@ public class Dashboard {
 	WebElement headerOfEnrollNow;
 	@FindBy(xpath = "//h5[text()='Please enter your personal and contact information.']")
 	WebElement subHeaderOfEnrollNow;
-
+	//First Name
 	@FindBy(xpath = "//input[@name='f_name']")
 	WebElement firstNameOfEnroll;
 	@FindBy(xpath = "//small[text()='Must be alphabetic characters.']")
 	WebElement fNameAlphabeticError;
 	@FindBy(xpath = "//small[text()='First Name is a required field.']")
 	WebElement fNameRequiredError;
+	//Middle Name
 	@FindBy(xpath = "//input[@name='m_name']")
 	WebElement middleNameOfEnrollNoW;
 	@FindBy(xpath = "//small[text()='Must be alphabetic characters.']")
 	WebElement mNameRequiredError;
+	//last Name
 	@FindBy(xpath = "//input[@name='l_name']")
 	WebElement lastNameOfEnrollNow;
 	@FindBy(xpath = "//small[text()='Last Name is a required field.']")
 	WebElement lNameRequiredField;
 	@FindBy(xpath = "//small[text()='Must be alphabetic characters.']")
 	WebElement lNameAlphabaticError;
+	//Select Profession
 	@FindBy(xpath = "//select[@name='i_am']")
 	WebElement selectProfession;
 	@FindBy(xpath = "//select[@name='i_am']/option")
 	List<WebElement> selectProfessionList;
 	@FindBy(xpath = "//small[@id='i_am_error']")
 	WebElement selectProfessionRequiredError;
+	//Select Course
 	@FindBy(xpath = "//select[@name='course_wish_to_enroll']")
 	WebElement selectCourse;
 	@FindBy(xpath = "//select[@name='course_wish_to_enroll']/option")
@@ -157,6 +161,7 @@ public class Dashboard {
 	WebElement selectCourseRequiredError;
 	@FindBy(xpath = "//option[text()='Python']")
 	WebElement selectPython;
+	//phone Number
 	@FindBy(xpath = "//input[@name='phone']")
 	WebElement phoneNumInEnrollNow;
 	@FindBy(xpath = "//small[text()='Phone Number is a required field.']")
@@ -175,41 +180,44 @@ public class Dashboard {
 	WebElement phoneNumCanNotBeAlphabatic;
 	@FindBy(xpath = "//small[@id='phone_error']")
 	WebElement phoneNumMustBeValidNumber;
-
+	//ImageFile
 	@FindBy(xpath = "//input[@name='image']")
 	WebElement chooseImageInEnrollNow;
 	@FindBy(xpath = "//span[text()='Personal Image is a required field.']")
 	WebElement imageRequiredFieldElement;
+	//PhotoId
 	@FindBy(xpath = "//input[@name='photo_id']")
 	WebElement choosePhotoID;
 	@FindBy(xpath = "//input[@name='email']")
 	WebElement emailInEnrollNow;
 	@FindBy(xpath = "//span[text()='Photo Id is a required field.']")
 	WebElement photoIdRequiredElement;
-	
+	//Email
 	@FindBy(xpath = "//span[text()='Email Address is a required field.']")
 	WebElement emailRequiredField;
 	@FindBy(xpath = "//span[text()='Must be a valid Email Address.']")
 	WebElement emailMustBeValid;
-
+	//Password
 	@FindBy(xpath = "//input[@id='id_password']")
 	WebElement passwordEnrollNow;
 
 	@FindBy(xpath = "//*[@id='password_error']")
 	WebElement passwordRequiredFeild;
-
+	//Gender
 	@FindBy(xpath = "//select[@id='id_gender']")
 	WebElement chooseGender;
 	@FindBy(xpath = "//select[@id='id_gender']/option")
 	List<WebElement> chooseSexElements;
 	@FindBy(xpath = "//option[text()='Female']")
 	WebElement femaleInGender;
+	//birth Year
 	@FindBy(xpath = "//select[@name='birth_year']")
 	WebElement birthYearDropDown;
 	@FindBy(xpath = "//option[text()='1966']")
 	WebElement selectBirthYear;
 	@FindBy(xpath = "//span[text()='Birth Year is a required field.']")
 	WebElement birthYearRequiredFieldElement;
+	//Birth Month
 	@FindBy(xpath = "//select[@id='id_birth_month']")
 	WebElement birthMonthInEnrollNow;
 	@FindBy(xpath = "//select[@id='id_birth_month']/option")
@@ -1051,10 +1059,10 @@ public class Dashboard {
 				"Must be a valid Phone Number.");
 		inputTextThenClickTab(phoneNumInEnrollNow, "0000233095");
 		verifyErrorMessageUnderTheField(phoneNumMustNotStartWith0, Attribute.INNER_HTML,
-				"Must be a valid Phone Number.");
+				"Phone Number must not start with a 1 or 0.");
 		inputTextThenClickTab(phoneNumInEnrollNow, "1100233095");
 		verifyErrorMessageUnderTheField(phoneNumMustNotStartWith1, Attribute.INNER_HTML,
-				"Must be a valid Phone Number.");
+				"Phone Number must not start with a 1 or 0.");
 		inputTextThenClickTab(phoneNumInEnrollNow, "#%$%^$#@#$");
 		verifyErrorMessageUnderTheField(phoneNumMustBeValidNumber, Attribute.INNER_HTML,
 				"Must be a valid Phone Number.");
@@ -1088,17 +1096,17 @@ public class Dashboard {
 		pause(1000);
 		inputTextThenClickTab(passwordEnrollNow, "Rubuait-Rahman");// must not have first name
 		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
-				"Please refer to Password requirements.");
+				"Password cannot contain First Name, Last Name, or email.");
 		clearTextFromTheField(passwordEnrollNow);
 		pause(1000);
 		inputTextThenClickTab(passwordEnrollNow, "Rahman-123");// must not have last name
 		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
-				"Please refer to Password requirements.");
+				"Password cannot contain First Name, Last Name, or email.");
 		clearTextFromTheField(passwordEnrollNow);
 		pause(1000);
 		inputTextThenClickTab(passwordEnrollNow, "Rahman@gmail.com");// must not have email parts
 		verifyErrorMessageUnderTheField(passwordRequiredFeild, Attribute.INNER_HTML,
-				"Please refer to Password requirements.");
+				"Password cannot contain First Name, Last Name, or email.");
 		clearTextFromTheField(passwordEnrollNow);
 		pause(1000);
 		inputTextThenClickTab(passwordEnrollNow, "$%^^%@!##$$m");
