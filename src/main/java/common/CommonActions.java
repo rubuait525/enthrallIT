@@ -503,6 +503,12 @@ public class CommonActions {
 								
 				}
 				
+//				// I did this
+//				public static void switchToChildWindow(WebDriver driver2, WebElement automation2, WebElement enrollNow2) {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//				
 	
 				
 				

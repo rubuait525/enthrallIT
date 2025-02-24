@@ -53,8 +53,9 @@ public class Dashboard {
 		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	}
 
+	
+	
 	@FindBy(xpath = "//a[text()='Return site']")
-
 	WebElement returnSite;
 	@FindBy(xpath = "//a[@id='dashboard-link']")
 	WebElement dashboard;
@@ -341,7 +342,7 @@ public class Dashboard {
 	WebElement summitButtonSignatureRequiredElement;
 	@FindBy(xpath = "//p[contains(text(),'Thank you for registering')]")
 	WebElement thankYouForRegistation;
-	@FindBy(xpath = "//button[text()='Right Click Action']")
+	@FindBy(xpath = "//button[@id='customButton']")
 	WebElement rightClickActionInEnrollNow;
 	@FindBy(xpath = "//li[text()='Back']")
 	WebElement backInRightClickElement;
@@ -843,10 +844,24 @@ public class Dashboard {
 	}
 
 	public void primary_language_mousehover_validation_in_enroll_now() {
+		//for  TDD enthrall
+		
 		pause(2000);
 		scrollIntoViewTheElementUsingJavascriptExecutor(driver, highestEdu);
 		pause(2000);
 		mouseHoverAction(driver, selectLanguage, languageBangali);
+		
+		//line 857 to 864 for bdd
+		
+		
+//		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+//	
+//	    scrollIntoViewTheElementUsingJavascriptExecutor(driver, highestEdu);
+//	    pause(3000);
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(selectLanguage);
+//		clickElement(languageBangali);
+//		
 
 	}
 
@@ -869,13 +884,21 @@ public class Dashboard {
 	}
 
 	public void terms_and_condition_validation_enroll_now() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-		scrollIntoViewTheElementUsingJavascriptExecutor(driver, cityInEnrollNow);
-		doubleClickActionAccept(driver, termsConditionInEnrollNow);
+		 
+			scrollIntoViewTheElementUsingJavascriptExecutor(driver, cityInEnrollNow);
+			//change here put // 884
+			//doubleClickActionAccept(driver, termsConditionInEnrollNow);
+			//doubleClickActionAccept(driver, termsConditionInEnrollNow);
+			Actions actions = new Actions(driver);
+			actions.doubleClick(termsConditionInEnrollNow).perform();
+			pause(2000);
+	        // Find the "Accept" button in the modal
+	        WebElement acceptButton = driver.findElement(By.id("acceptButton"));
 
-		pause(1000);
-		System.out.println("trying to click accept btn");
-		driver.findElement(By.id("acceptButton")).click();
+	        // Click the "Accept" button
+	        acceptButton.click();
+	        pause(2000);
+
 
 	}
 
@@ -925,17 +948,18 @@ public class Dashboard {
 	}
 
 	public void right_click_action_validation_enroll_now() {
-		// driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		//driver.get("https://enthrallit.com/course/dashboard/enrolls/");
 		scrollIntoViewTheElementUsingJavascriptExecutor(driver, cityInEnrollNow);
 
 //		clickElement(rightClickActionInEnrollNow);
 		rightClick(driver, rightClickActionInEnrollNow);
-//		pause(3000);
+		pause(3000);
 		System.out.println("trying to click back:: this runs into exception ");
+		pause(3000);
 		clickElement(backInRightClickElement);
 
-		System.out.println("trying to click dissmiss/cancel ");
-		driver.switchTo().alert().dismiss();
+//		System.out.println("trying to click dissmiss/cancel ");
+//		driver.switchTo().alert().dismiss();
 
 	}
 

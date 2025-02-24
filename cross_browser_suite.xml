@@ -4,28 +4,28 @@
   <test thread-count="5" name="EdgeTest">
 		<parameter name="browser" value="edge" />
 		<classes>
-			<class name="pagesTest.NewUserRegistrationTest" />
+			<class name="pagesTest.HomePageTest" />
 		</classes>
 	</test>
 	
 	<test thread-count="5" name="ChromeTest">
 		<parameter name="browser" value="chrome" />
 		<classes>
-			<class name="pagesTest.NewUserRegistrationTest" />
+			<class name="pagesTest.HomePageTest" />
 		</classes>
 	</test>
 	
 	<test thread-count="5" name="FireFoxTest">
 		<parameter name="browser" value="firefox" />
 		<classes>
-			<class name="pagesTest.NewUserRegistrationTest" />
+			<class name="pagesTest.HomePageTest" />
 		</classes>
 	</test>
 	
 	<test thread-count="5" name="SafariTest">
 		<parameter name="browser" value="safari" />
 		<classes>
-			<class name="pagesTest.NewUserRegistrationTest" />
+			<class name="pagesTest.HomePageTest" />
 		</classes>
 	</test>
 </suite> <!-- Suite -->

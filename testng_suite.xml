@@ -11,7 +11,7 @@
 		</groups>
 		
 		<classes>
-			<class name="pagesTest.NewUserRegistrationTest" />
+			<class name="HomePageTest" />
 		</classes>
 	</test>
 </suite><!-- To create this Test Suit: Project .... Right click .... TestNG .... Covert To TestNG -->

@@ -10,7 +10,7 @@
 			</run>
 		</groups>	
 		<classes>
-			<class name="pagesTest.NewUserRegistrationTest" />
+			<class name="pagesTest.HomePageTest" />
 		</classes>
 	</test>
 </suite>

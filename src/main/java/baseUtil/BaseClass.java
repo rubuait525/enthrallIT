@@ -58,7 +58,7 @@ public class BaseClass {
 	
 	@Parameters("browser")
 	@BeforeMethod	
-	public void setUp(@Optional(CHROME) String browserName) {		
+	public void setUp(@Optional(EDGE) String browserName) {		
 		initDriver(browserName);
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
@@ -104,11 +104,16 @@ public class BaseClass {
 			break;
 			
 		default:
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
+//			WebDriverManager.chromedriver().setup();
+//			driver = new ChromeDriver();
 			//System.setProperty("webdriver.chrome.driver","./driver/chromedriver");
 			//driver = new ChromeDriver();
+			System.setProperty("webdriver.edge.driver", "./driver/msedgedriver");		
+			driver = new EdgeDriver();
 			break;
+			
+			
+			
 		}				
 	}
 	

@@ -269,9 +269,12 @@ public class DashboardTest extends BaseClass {
 
 	@Test
 	public void primary_language_mouse_hover_test() {
+		
 		login.loginWithClickLoginFromHomePage();
 		dashboard.automation_validation_on_dashboard_page_with_enroll_now();
 		dashboard.primary_language_mousehover_validation_in_enroll_now();
+		
+		//dashboard.primary_language_mousehover_validation_in_enroll_now();
 	}
 
 	@Test
@@ -282,7 +285,7 @@ public class DashboardTest extends BaseClass {
 	}
 
 	@Test
-	public void terms_and_condition_in_enroll_now_test() {
+		public void terms_and_condition_in_enroll_now_test() {
 		login.loginWithClickLoginFromHomePage();
 		dashboard.automation_validation_on_dashboard_page_with_enroll_now();
 		dashboard.terms_and_condition_validation_enroll_now();
